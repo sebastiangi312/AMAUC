@@ -13,15 +13,5 @@ public class CourseService {
     this.repository = repository;
   }
   
-  public Course getCourseById(int id){
-    return repository.getById(id);
-  }
   
-  public void addCourse(Course course){
-    repository.add(course);
-  }
-  
-  public List<Course> getAll(){
-    return repository.getAll();
-  }
 }
