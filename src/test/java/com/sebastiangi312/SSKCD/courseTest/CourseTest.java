@@ -10,8 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @SpringBootTest
 @Transactional
@@ -49,8 +50,8 @@ class CourseTest {
     course.setGrade(4.2);
     
     courseRepository.save(course);
-    List<Course> obtained = new LinkedList<>();
-    courseRepository.findAll().forEach(obtained::add);
+    List<Course> obtained = StreamSupport.stream(courseRepository.findAll().spliterator(),false)
+                                          .collect(Collectors.toList());
     
     Assert.assertEquals(course.toString(), obtained.get(0).toString());
     

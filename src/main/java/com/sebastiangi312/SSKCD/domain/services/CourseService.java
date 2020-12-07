@@ -4,6 +4,8 @@ import com.sebastiangi312.SSKCD.domain.Course;
 import com.sebastiangi312.SSKCD.domain.repository.CourseRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class CourseService {
   
@@ -13,5 +15,17 @@ public class CourseService {
     this.repository = repository;
   }
   
+  public void addCourse(Course course){
+    repository.save(course);
+  }
+  
+  public Course getCourseById(long id){
+    return repository.findById(id).orElse(null);
+  }
+  
+  public List<Course> getAll(){
+    return StreamSupport.stream(repository.findAll().spliterator(),false)
+            .collect(Collectors.toList());
+  }
   
 }
