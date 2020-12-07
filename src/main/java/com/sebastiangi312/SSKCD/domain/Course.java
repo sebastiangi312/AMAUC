@@ -1,11 +1,16 @@
 package com.sebastiangi312.SSKCD.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Course {
 
+  @Id
   private int id;
   private String name;
   private int units;
-  private int grade;
+  private double grade;
   
   public Course() {
   
@@ -42,11 +47,21 @@ public class Course {
     this.units = units;
   }
   
-  public int getGrade() {
+  public double getGrade() {
     return grade;
   }
   
-  public void setGrade(int grade) {
+  public void setGrade(double grade) {
     this.grade = grade;
+  }
+  
+  @Override
+  public String toString() {
+    return "Course{" +
+      "id=" + id +
+      ", name='" + name + '\'' +
+      ", units=" + units +
+      ", grade=" + grade +
+      '}';
   }
 }
