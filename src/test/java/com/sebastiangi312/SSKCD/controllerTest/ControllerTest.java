@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class ControllerTest {
       "2019-2S Ordinaria", "3.5", "APROBADA"};
     expected.add(second);
     List<String[]> obtained = courseController.parseToList(text);
-    
     for(int i = 0; i < obtained.size();i++){
       for (int j = 0; j < obtained.get(i).length; j++) {
         Assert.assertEquals(expected.get(i)[j],obtained.get(i)[j]);

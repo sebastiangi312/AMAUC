@@ -1,4 +1,4 @@
-package com.sebastiangi312.SSKCD.courseTest;
+package com.sebastiangi312.SSKCD.domainTest;
 
 import com.sebastiangi312.SSKCD.domain.Course;
 import com.sebastiangi312.SSKCD.domain.repository.CourseRepository;
@@ -25,7 +25,7 @@ class CourseTest {
   private CourseRepository courseRepository;
   
   @Test
-  public void verifyCourseCanBeSaved(){
+  public void verifyCourseCanBeSaved() {
     final Course course = new Course();
     course.setId(3007848);
     course.setName("BASE DE DATOS II");
@@ -37,12 +37,12 @@ class CourseTest {
     final TypedQuery<Course> query = entityManager.createQuery("SELECT c from  Course c", Course.class);
     
     final Course resultCourse = query.getResultList().get(0);
-  
-    Assert.assertEquals("BASE DE DATOS II",resultCourse.getName());
+    
+    Assert.assertEquals("BASE DE DATOS II", resultCourse.getName());
   }
   
   @Test
-  public void shouldPerformCRUDOperations(){
+  public void shouldPerformCRUDOperations() {
     final Course course = new Course();
     course.setId(3007848);
     course.setName("BASE DE DATOS II");
@@ -50,14 +50,14 @@ class CourseTest {
     course.setGrade(4.2);
     
     courseRepository.save(course);
-    List<Course> obtained = StreamSupport.stream(courseRepository.findAll().spliterator(),false)
-                                          .collect(Collectors.toList());
+    List<Course> obtained = StreamSupport.stream(courseRepository.findAll().spliterator(), false)
+      .collect(Collectors.toList());
     
     Assert.assertEquals(course.toString(), obtained.get(0).toString());
     
     courseRepository.deleteById(course.getId());
     
-    Assert.assertEquals(courseRepository.count(),0);
+    Assert.assertEquals(courseRepository.count(), 0);
   }
   
 }

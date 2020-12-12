@@ -2,11 +2,13 @@ package com.sebastiangi312.SSKCD.domain.services;
 
 import com.sebastiangi312.SSKCD.domain.Course;
 import com.sebastiangi312.SSKCD.domain.repository.CourseRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@Component
 public class CourseService {
   
   private final CourseRepository repository;
@@ -15,17 +17,17 @@ public class CourseService {
     this.repository = repository;
   }
   
-  public void addCourse(Course course){
+  public void addCourse(Course course) {
     repository.save(course);
   }
   
-  public Course getCourseById(long id){
+  public Course getCourseById(long id) {
     return repository.findById(id).orElse(null);
   }
   
-  public List<Course> getAll(){
-    return StreamSupport.stream(repository.findAll().spliterator(),false)
-            .collect(Collectors.toList());
+  public List<Course> getAll() {
+    return StreamSupport.stream(repository.findAll().spliterator(), false)
+      .collect(Collectors.toList());
   }
   
 }
