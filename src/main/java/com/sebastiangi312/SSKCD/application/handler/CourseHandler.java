@@ -1,18 +1,22 @@
 package com.sebastiangi312.SSKCD.application.handler;
 
+import com.sebastiangi312.SSKCD.application.factory.CourseFactory;
 import com.sebastiangi312.SSKCD.domain.Course;
 import com.sebastiangi312.SSKCD.domain.services.CourseService;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Component
 public class CourseHandler {
   
   private final CourseService courseService;
+  private final CourseFactory courseFactory;
   
-  public CourseHandler(CourseService courseService) {
+  public CourseHandler(CourseService courseService, CourseFactory courseFactory) {
     this.courseService = courseService;
+    this.courseFactory = courseFactory;
   }
   
   public void saveCourses(List<String[]> courses) {
@@ -22,8 +26,16 @@ public class CourseHandler {
       String name = idAndName[1];
       int units = Integer.parseInt(course[1]);
       double grade = Double.parseDouble(course[4]);
-      courseService.addCourse(new Course(id, name, units, grade));
+      courseService.addCourse(courseFactory.createCourse(id,name,units,grade));
     }
+  }
+  
+  public double getPAPA(){
+    List<Course> courses = courseService.getAll();
+    double gradesMultipliedUnits = courses.stream().reduce(0.0,(subtotal,course) ->
+                                    subtotal+course.getGrade()*course.getUnits(), Double::sum);
+    double totalUnits = courses.stream().mapToDouble(Course::getUnits).reduce(0, Double::sum);
+    return gradesMultipliedUnits / totalUnits;
   }
   
   private String[] separateIdAndName(String idAndName) {
