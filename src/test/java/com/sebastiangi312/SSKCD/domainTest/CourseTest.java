@@ -27,7 +27,7 @@ class CourseTest {
   @Test
   public void verifyCourseCanBeSaved() {
     final Course course = new Course();
-    course.setId(3007848);
+    course.setCode("3007848");
     course.setName("BASE DE DATOS II");
     course.setUnits(4);
     course.setGrade(3.8);
@@ -44,7 +44,7 @@ class CourseTest {
   @Test
   public void shouldPerformCRUDOperations() {
     final Course course = new Course();
-    course.setId(3007848);
+    course.setCode("3007848");
     course.setName("BASE DE DATOS II");
     course.setUnits(4);
     course.setGrade(4.2);
@@ -55,9 +55,6 @@ class CourseTest {
     
     Assert.assertEquals(course.toString(), obtained.get(0).toString());
     
-    courseRepository.deleteById(course.getId());
-    
-    Assert.assertEquals(courseRepository.count(), 0);
   }
   
 }

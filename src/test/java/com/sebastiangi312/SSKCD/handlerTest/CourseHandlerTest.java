@@ -31,8 +31,8 @@ public class CourseHandlerTest {
     
     List<Course> expected = new LinkedList<>();
     
-    expected.add(new Course(3007848,"BASE DE DATOS II",3,4.3));
-    expected.add(new Course(3006915,"ESTADÍSTICA II",4,3.5));
+    expected.add(new Course("3007848","BASE DE DATOS II",3,4.3));
+    expected.add(new Course("3006915","ESTADÍSTICA II",4,3.5));
     
     List<Course> obtained = courseHandler.getAll();
     Collections.sort(expected);

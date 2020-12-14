@@ -3,6 +3,8 @@ package com.sebastiangi312.SSKCD.application.handler;
 import com.sebastiangi312.SSKCD.application.factory.CourseFactory;
 import com.sebastiangi312.SSKCD.domain.Course;
 import com.sebastiangi312.SSKCD.domain.services.CourseService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -22,20 +24,18 @@ public class CourseHandler {
   public void saveCourses(List<String[]> courses) {
     for (String[] course : courses) {
       String[] idAndName = separateIdAndName(course[0]);
-      long id = Long.parseLong(idAndName[0]);
+      String id = idAndName[0];
       String name = idAndName[1];
       int units = Integer.parseInt(course[1]);
-      double grade = Double.parseDouble(course[4]);
+      double grade;
+      try{
+        grade = Double.parseDouble(course[4]);
+      }catch (Exception e){
+        grade = 0;
+        units = 0;
+      }
       courseService.addCourse(courseFactory.createCourse(id,name,units,grade));
     }
-  }
-  
-  public double getPAPA(){
-    List<Course> courses = courseService.getAll();
-    double gradesMultipliedUnits = courses.stream().reduce(0.0,(subtotal,course) ->
-                                    subtotal+course.getGrade()*course.getUnits(), Double::sum);
-    double totalUnits = courses.stream().mapToDouble(Course::getUnits).reduce(0, Double::sum);
-    return gradesMultipliedUnits / totalUnits;
   }
   
   private String[] separateIdAndName(String idAndName) {
@@ -57,4 +57,6 @@ public class CourseHandler {
   public List<Course> getAll() {
     return courseService.getAll();
   }
+  
+  public Course get(String code) { return courseService.getCourseByCode(code);}
 }

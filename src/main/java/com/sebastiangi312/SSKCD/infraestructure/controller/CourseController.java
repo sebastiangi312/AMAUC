@@ -1,14 +1,17 @@
 package com.sebastiangi312.SSKCD.infraestructure.controller;
 
 import com.sebastiangi312.SSKCD.application.handler.CourseHandler;
-import org.springframework.stereotype.Controller;
+import com.sebastiangi312.SSKCD.domain.Course;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Controller
+@RestController
+@RequestMapping("api/v1/courses")
 public class CourseController {
   
   
@@ -18,16 +21,11 @@ public class CourseController {
     this.courseHandler = courseHandler;
   }
   
-  
-  public void uploadCourses(String text) {
+  @PostMapping
+  public ResponseEntity<String> uploadCourses(@RequestBody final String text) {
     List<String[]> courses = parseToList(text);
     courseHandler.saveCourses(courses);
-  }
-  
-  public double getPAPA(){
-    double PAPA = courseHandler.getPAPA();
-    DecimalFormat df = new DecimalFormat("###.###");
-    return Double.parseDouble(df.format(PAPA));
+    return new ResponseEntity<>(HttpStatus.OK);
   }
   
   public List<String[]> parseToList(String coursesInText) {
@@ -41,5 +39,12 @@ public class CourseController {
     return coursesMerged.stream().map(i -> i.split("\t")).collect(Collectors.toList());
   }
   
+  @GetMapping
+  public List<Course> getAll(){
+    return courseHandler.getAll();
+  }
   
+  @GetMapping
+  @RequestMapping("{code}")
+  public Course get(@PathVariable String code){ return courseHandler.get(code); }
 }

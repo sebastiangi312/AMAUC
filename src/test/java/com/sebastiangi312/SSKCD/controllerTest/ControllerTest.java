@@ -37,11 +37,4 @@ public class ControllerTest {
       }
     }
   }
-  
-  @Test
-  public void getPAPAIsWorking(){
-    courseController.uploadCourses(courses);
-    
-    Assert.assertEquals(3.843,courseController.getPAPA(),0.001);
-  }
 }

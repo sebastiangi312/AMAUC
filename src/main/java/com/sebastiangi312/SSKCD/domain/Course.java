@@ -1,13 +1,22 @@
 package com.sebastiangi312.SSKCD.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Course implements Comparable<Course> {
   
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
+  
+  public String getCode() {
+    return code;
+  }
+  
+  private String code;
   private String name;
   private int units;
   private double grade;
@@ -16,19 +25,16 @@ public class Course implements Comparable<Course> {
   
   }
   
-  public Course(long id, String name, int units, double grade) {
-    this.id = id;
+  public Course(String code, String name, int units, double grade) {
+    this.code = code;
     this.name = name;
     this.units = units;
     this.grade = grade;
   }
   
-  public long getId() {
-    return id;
-  }
   
-  public void setId(long id) {
-    this.id = id;
+  public void setCode(String code) {
+    this.code = code;
   }
   
   public String getName() {
@@ -58,7 +64,7 @@ public class Course implements Comparable<Course> {
   @Override
   public String toString() {
     return "Course{" +
-      "id=" + id +
+      "code=" + code +
       ", name='" + name + '\'' +
       ", units=" + units +
       ", grade=" + grade +
@@ -72,7 +78,7 @@ public class Course implements Comparable<Course> {
     
     Course course = (Course) o;
     
-    if (id != course.id) return false;
+    if (!code.equals(course.code)) return false;
     if (units != course.units) return false;
     if (Double.compare(course.grade, grade) != 0) return false;
     return name.equals(course.name);

@@ -21,13 +21,12 @@ public class CourseService {
     repository.save(course);
   }
   
-  public Course getCourseById(long id) {
-    return repository.findById(id).orElse(null);
+  public Course getCourseByCode(String code) {
+    return repository.findByCode(code);
   }
   
   public List<Course> getAll() {
     return StreamSupport.stream(repository.findAll().spliterator(), false)
       .collect(Collectors.toList());
   }
-  
 }
