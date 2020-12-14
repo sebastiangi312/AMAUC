@@ -52,8 +52,12 @@ class CourseTest {
     courseRepository.save(course);
     List<Course> obtained = StreamSupport.stream(courseRepository.findAll().spliterator(), false)
       .collect(Collectors.toList());
-    
+    courseRepository.deleteByCode("3007848");
+  
+    Assert.assertEquals(0,courseRepository.count());
     Assert.assertEquals(course.toString(), obtained.get(0).toString());
+  
+  
     
   }
   

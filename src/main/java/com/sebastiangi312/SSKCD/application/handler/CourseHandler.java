@@ -28,13 +28,15 @@ public class CourseHandler {
       String name = idAndName[1];
       int units = Integer.parseInt(course[1]);
       double grade;
+      Course.typeCourse isGradable;
       try{
         grade = Double.parseDouble(course[4]);
+        isGradable = Course.typeCourse.gradable;
       }catch (Exception e){
         grade = 0;
-        units = 0;
+        isGradable = Course.typeCourse.noGradable;
       }
-      courseService.addCourse(courseFactory.createCourse(id,name,units,grade));
+      courseService.addCourse(courseFactory.createCourse(id,name,units,grade, isGradable));
     }
   }
   
@@ -59,4 +61,8 @@ public class CourseHandler {
   }
   
   public Course get(String code) { return courseService.getCourseByCode(code);}
+  
+  public void deleteCourseByCode(String code){
+    courseService.deleteCourseByCode(code);
+  }
 }

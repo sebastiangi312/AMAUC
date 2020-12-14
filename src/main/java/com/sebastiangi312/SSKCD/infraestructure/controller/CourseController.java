@@ -6,12 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/v1/courses")
+@RequestMapping("api/v1/courseManager")
 public class CourseController {
   
   
@@ -21,7 +22,8 @@ public class CourseController {
     this.courseHandler = courseHandler;
   }
   
-  @PostMapping
+  @Transactional
+  @RequestMapping(value = "/courses", method = RequestMethod.POST)
   public ResponseEntity<String> uploadCourses(@RequestBody final String text) {
     List<String[]> courses = parseToList(text);
     courseHandler.saveCourses(courses);
@@ -39,12 +41,17 @@ public class CourseController {
     return coursesMerged.stream().map(i -> i.split("\t")).collect(Collectors.toList());
   }
   
-  @GetMapping
+  
+  @RequestMapping(value = "/courses", method = RequestMethod.GET)
   public List<Course> getAll(){
     return courseHandler.getAll();
   }
   
-  @GetMapping
-  @RequestMapping("{code}")
+  
+  @RequestMapping(value = "/course/{code}", method = RequestMethod.GET)
   public Course get(@PathVariable String code){ return courseHandler.get(code); }
+  
+  @Transactional
+  @RequestMapping(value = "/course/{code}", method = RequestMethod.DELETE)
+  public void delete(@PathVariable String code){ courseHandler.deleteCourseByCode(code); }
 }

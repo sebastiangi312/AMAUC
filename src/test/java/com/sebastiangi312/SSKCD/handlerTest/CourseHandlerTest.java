@@ -31,8 +31,8 @@ public class CourseHandlerTest {
     
     List<Course> expected = new LinkedList<>();
     
-    expected.add(new Course("3007848","BASE DE DATOS II",3,4.3));
-    expected.add(new Course("3006915","ESTADÍSTICA II",4,3.5));
+    expected.add(new Course("3007848","BASE DE DATOS II",3,4.3, Course.typeCourse.gradable));
+    expected.add(new Course("3006915","ESTADÍSTICA II",4,3.5, Course.typeCourse.gradable));
     
     List<Course> obtained = courseHandler.getAll();
     Collections.sort(expected);
@@ -40,6 +40,7 @@ public class CourseHandlerTest {
     for(int i = 0; i < obtained.size();i++){
       Assert.assertEquals(expected.get(i),obtained.get(i));
     }
+    
     Assert.assertEquals(expected.size(), obtained.size());
   }
 }

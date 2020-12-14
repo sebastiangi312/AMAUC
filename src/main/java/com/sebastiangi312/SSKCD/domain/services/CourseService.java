@@ -21,6 +21,10 @@ public class CourseService {
     repository.save(course);
   }
   
+  public void deleteCourseByCode(String code){
+    repository.deleteByCode(code);
+  }
+  
   public Course getCourseByCode(String code) {
     return repository.findByCode(code);
   }

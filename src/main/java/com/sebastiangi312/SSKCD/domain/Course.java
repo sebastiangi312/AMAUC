@@ -12,30 +12,31 @@ public class Course implements Comparable<Course> {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   
-  public String getCode() {
-    return code;
-  }
-  
   private String code;
   private String name;
   private int units;
   private double grade;
+  private typeCourse isGradable;
+  
   
   public Course() {
   
   }
   
-  public Course(String code, String name, int units, double grade) {
+  public Course(String code, String name, int units, double grade, typeCourse isGradable) {
     this.code = code;
     this.name = name;
     this.units = units;
     this.grade = grade;
+    this.isGradable = isGradable;
   }
   
   
   public void setCode(String code) {
     this.code = code;
   }
+  
+  public String getCode() { return code; }
   
   public String getName() {
     return name;
@@ -87,5 +88,9 @@ public class Course implements Comparable<Course> {
   @Override
   public int compareTo(Course that) {
     return Long.compare(this.id, that.id);
+  }
+  
+  public enum typeCourse {
+    gradable, noGradable
   }
 }
