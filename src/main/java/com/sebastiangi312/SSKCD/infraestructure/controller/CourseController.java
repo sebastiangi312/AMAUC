@@ -33,9 +33,9 @@ public class CourseController {
   public List<String[]> parseToList(String coursesInText) {
     String[] coursesSeparatedByLines = coursesInText.split("\n");
     List<String> coursesMerged = new LinkedList<>();
-    for (int i = 1; i < coursesSeparatedByLines.length; i += 2) {
-      String courseMerged = coursesSeparatedByLines[i - 1].concat("\t").
-        concat(coursesSeparatedByLines[i]);
+    for (int line = 0; line < coursesSeparatedByLines.length; line += 2) {
+      String courseMerged = coursesSeparatedByLines[line].concat("\t").
+        concat(coursesSeparatedByLines[line+1]);
       coursesMerged.add(courseMerged);
     }
     return coursesMerged.stream().map(i -> i.split("\t")).collect(Collectors.toList());
@@ -54,4 +54,16 @@ public class CourseController {
   @Transactional
   @RequestMapping(value = "/course/{code}", method = RequestMethod.DELETE)
   public void delete(@PathVariable String code){ courseHandler.deleteCourseByCode(code); }
+  
+  @RequestMapping(value = "/generalInformation", method = RequestMethod.GET)
+  public String getPAPA(){
+    final double APPROVED = 3.0;
+    List<Course> gradableCourses = courseHandler.getGradableCourses();
+    double PAPA = courseHandler.getGradeAverage(gradableCourses);
+    List<Course> approvedCourses = gradableCourses.stream().filter(i -> i.getGrade() >= APPROVED)
+                                                  .collect(Collectors.toList());
+    double PA = courseHandler.getGradeAverage(approvedCourses);
+    return "{ PAPA: +"+String.format("%.2g%n", PAPA)+
+            ",\nPA: "+String.format("%.2g%n", PA)+"\n }";
+  }
 }

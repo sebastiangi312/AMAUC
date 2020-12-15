@@ -43,4 +43,19 @@ public class CourseHandlerTest {
     
     Assert.assertEquals(expected.size(), obtained.size());
   }
+  
+  @Test
+  public void isGettingCorrectGradeAverage(){
+  
+    List<Course> courses = new LinkedList<>();
+  
+    courses.add(new Course("3007848","BASE DE DATOS II",3,4.3, Course.typeCourse.gradable));
+    courses.add(new Course("3006915","ESTADÍSTICA II",4,3.5, Course.typeCourse.gradable));
+    
+    Assert.assertEquals(3.842,courseHandler.getGradeAverage(courses),0.01);
+    
+    courses.clear();
+  
+    Assert.assertEquals(0,courseHandler.getGradeAverage(courses),0.01);
+  }
 }

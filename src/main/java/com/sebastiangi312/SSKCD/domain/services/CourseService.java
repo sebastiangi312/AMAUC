@@ -29,8 +29,10 @@ public class CourseService {
     return repository.findByCode(code);
   }
   
-  public List<Course> getAll() {
+  public List<Course> getAllCourses() {
     return StreamSupport.stream(repository.findAll().spliterator(), false)
       .collect(Collectors.toList());
   }
+  
+  
 }

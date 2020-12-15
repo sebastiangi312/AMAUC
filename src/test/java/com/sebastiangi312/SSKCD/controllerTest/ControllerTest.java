@@ -12,15 +12,17 @@ import java.util.List;
 @SpringBootTest
 public class ControllerTest {
   
-  private final String courses = "BASE DE DATOS II (3007848) \t3\tDISCIPLINAR OPTATIVA\t2019-2S Ordinaria\t4.3\n" +
-    "APROBADA\n" +
-    "ESTADÍSTICA II (3006915) \t4\tFUND. OPTATIVA\t2019-2S Ordinaria\t3.5\n" +
-    "APROBADA";
   @Autowired
   private CourseController courseController;
   
   @Test
   public void verifyParse(){
+    
+    String courses = "BASE DE DATOS II (3007848) \t3\tDISCIPLINAR OPTATIVA\t2019-2S Ordinaria\t4.3\n" +
+      "APROBADA\n" +
+      "ESTADÍSTICA II (3006915) \t4\tFUND. OPTATIVA\t2019-2S Ordinaria\t3.5\n" +
+      "APROBADA\n";
+    
     List<String[]> obtained = courseController.parseToList(courses);
     
     String[] first = {"BASE DE DATOS II (3007848) ", "3", "DISCIPLINAR OPTATIVA",
@@ -36,5 +38,23 @@ public class ControllerTest {
         Assert.assertEquals(expected.get(i)[j],obtained.get(i)[j]);
       }
     }
+  }
+  @Test
+  public void isGettingCorrectGeneralInformation(){
+    String courses = "BASE DE DATOS II (3007848) \t3\tDISCIPLINAR OPTATIVA\t2019-2S Ordinaria\t4.3\n" +
+      "APROBADA\n" +
+      "ESTADÍSTICA II (3006915) \t4\tFUND. OPTATIVA\t2019-2S Ordinaria\t3.5\n" +
+      "APROBADA\n" +
+      "TEORÍA DE LA GESTIÓN (3007333) \t3\tDISCIPLINAR OBLIGATORIA\t2017-2S Ordinaria\t2.5\n" +
+      "REPROBADA";
+    
+    courseController.uploadCourses(courses);
+    
+    double PAPA = 3.44;
+    double PA = 3.84;
+    String expected = "{ PAPA: +"+String.format("%.2g%n", PAPA)+
+      ",\nPA: "+String.format("%.2g%n", PA)+"\n }";
+    
+    Assert.assertEquals(expected,courseController.getPAPA());
   }
 }

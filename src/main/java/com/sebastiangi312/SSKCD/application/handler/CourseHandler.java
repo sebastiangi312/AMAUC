@@ -3,12 +3,10 @@ package com.sebastiangi312.SSKCD.application.handler;
 import com.sebastiangi312.SSKCD.application.factory.CourseFactory;
 import com.sebastiangi312.SSKCD.domain.Course;
 import com.sebastiangi312.SSKCD.domain.services.CourseService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CourseHandler {
@@ -57,12 +55,25 @@ public class CourseHandler {
   }
   
   public List<Course> getAll() {
-    return courseService.getAll();
+    return courseService.getAllCourses();
   }
   
   public Course get(String code) { return courseService.getCourseByCode(code);}
   
   public void deleteCourseByCode(String code){
     courseService.deleteCourseByCode(code);
+  }
+  
+  public List<Course> getGradableCourses(){
+    return courseService.getAllCourses().stream().filter(i -> i.getIsGradable() == Course.typeCourse.gradable)
+                        .collect(Collectors.toList());
+  }
+  
+  public Double getGradeAverage(List<Course> courses){
+    if(courses.isEmpty())
+      return 0.0;
+    double sumatoryGradesperUnits = courses.stream().map(i -> i.getUnits()*i.getGrade()).reduce(0.0, Double::sum);
+    double totalUnits = courses.stream().map(Course::getUnits).reduce(0, Integer::sum);
+    return sumatoryGradesperUnits / totalUnits;
   }
 }

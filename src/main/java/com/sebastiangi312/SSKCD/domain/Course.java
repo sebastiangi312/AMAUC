@@ -62,6 +62,14 @@ public class Course implements Comparable<Course> {
     this.grade = grade;
   }
   
+  public typeCourse getIsGradable() {
+    return isGradable;
+  }
+  
+  public void setIsGradable(typeCourse isGradable) {
+    this.isGradable = isGradable;
+  }
+  
   @Override
   public String toString() {
     return "Course{" +
