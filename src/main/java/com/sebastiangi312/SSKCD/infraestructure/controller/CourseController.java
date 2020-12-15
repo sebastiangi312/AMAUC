@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -56,14 +58,12 @@ public class CourseController {
   public void delete(@PathVariable String code){ courseHandler.deleteCourseByCode(code); }
   
   @RequestMapping(value = "/generalInformation", method = RequestMethod.GET)
-  public String getPAPA(){
-    final double APPROVED = 3.0;
+  public Map<String,Double> getPAPA(){
     List<Course> gradableCourses = courseHandler.getGradableCourses();
-    double PAPA = courseHandler.getGradeAverage(gradableCourses);
-    List<Course> approvedCourses = gradableCourses.stream().filter(i -> i.getGrade() >= APPROVED)
-                                                  .collect(Collectors.toList());
-    double PA = courseHandler.getGradeAverage(approvedCourses);
-    return "{ PAPA: +"+String.format("%.2g%n", PAPA)+
-            ",\nPA: "+String.format("%.2g%n", PA)+"\n }";
+    List<Course> approvedCourses = courseHandler.getApprovedCourses();
+    Map<String, Double> response = new HashMap<>();
+    response.put("PAPA", courseHandler.getGradeAverage(gradableCourses));
+    response.put("PA" ,courseHandler.getGradeAverage(approvedCourses));
+    return response;
   }
 }

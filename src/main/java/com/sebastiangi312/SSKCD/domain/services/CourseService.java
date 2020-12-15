@@ -34,5 +34,14 @@ public class CourseService {
       .collect(Collectors.toList());
   }
   
+  public List<Course> getGradableCourses(){
+    return getAllCourses().stream().filter(i -> i.getIsGradable() == Course.typeCourse.gradable)
+      .collect(Collectors.toList());
+  }
   
+  public List<Course> getApprovedCourses(){
+    final double APPROVED = 3.0;
+    return getGradableCourses().stream().filter(i -> i.getGrade() >= APPROVED)
+                               .collect(Collectors.toList());
+  }
 }

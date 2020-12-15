@@ -64,10 +64,9 @@ public class CourseHandler {
     courseService.deleteCourseByCode(code);
   }
   
-  public List<Course> getGradableCourses(){
-    return courseService.getAllCourses().stream().filter(i -> i.getIsGradable() == Course.typeCourse.gradable)
-                        .collect(Collectors.toList());
-  }
+  public List<Course> getGradableCourses(){ return courseService.getGradableCourses(); }
+  
+  public List<Course> getApprovedCourses(){ return courseService.getApprovedCourses(); }
   
   public Double getGradeAverage(List<Course> courses){
     if(courses.isEmpty())
