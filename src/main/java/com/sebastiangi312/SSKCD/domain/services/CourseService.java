@@ -44,4 +44,8 @@ public class CourseService {
     return getGradableCourses().stream().filter(i -> i.getGrade() >= APPROVED)
                                .collect(Collectors.toList());
   }
+  
+  public void deleteAll() {
+    repository.deleteAll();
+  }
 }

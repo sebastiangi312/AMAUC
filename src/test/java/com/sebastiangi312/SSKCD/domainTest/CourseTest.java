@@ -39,6 +39,7 @@ class CourseTest {
     final Course resultCourse = query.getResultList().get(0);
     
     Assert.assertEquals("BASE DE DATOS II", resultCourse.getName());
+    entityManager.clear();
   }
   
   @Test
@@ -56,9 +57,8 @@ class CourseTest {
   
     Assert.assertEquals(0,courseRepository.count());
     Assert.assertEquals(course.toString(), obtained.get(0).toString());
-  
-  
     
+    courseRepository.deleteAll();
   }
   
 }
