@@ -5,11 +5,11 @@ import com.sebastiangi312.SSKCD.persistance.repository.GradeEntityRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GradeDatabase {
+public class GradeRepositoryService {
   
   private final GradeEntityRepository repository;
   
-  public GradeDatabase(GradeEntityRepository repository) {
+  public GradeRepositoryService(GradeEntityRepository repository) {
     this.repository = repository;
   }
   
@@ -17,7 +17,4 @@ public class GradeDatabase {
     repository.save(grade);
   }
   
-  public void getGrade(GradeEntity grade){
-  
-  }
 }

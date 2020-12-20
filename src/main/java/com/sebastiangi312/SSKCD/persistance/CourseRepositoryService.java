@@ -5,11 +5,11 @@ import com.sebastiangi312.SSKCD.persistance.repository.CourseEntityRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CourseDatabase {
+public class CourseRepositoryService {
   
   private final CourseEntityRepository repository;
   
-  public CourseDatabase(CourseEntityRepository repository) {
+  public CourseRepositoryService(CourseEntityRepository repository) {
     this.repository = repository;
   }
   
@@ -17,7 +17,7 @@ public class CourseDatabase {
     repository.save(course);
   }
   
-  public void getCourse(String code){
-  
+  public CourseEntity getCourse(String code){
+    return repository.findByCode(code);
   }
 }

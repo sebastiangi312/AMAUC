@@ -24,10 +24,10 @@ public class GradeEntityAdapter {
     return fabric.createGrade(course, isApproved,grade,date);
   }
   
-  private boolean isNumeric(String cadena) {
+  private boolean isNumeric(String number) {
     boolean result;
     try {
-      Double.parseDouble(cadena);
+      Double.parseDouble(number);
       result = true;
     } catch (NumberFormatException excepcion) {
       result = false;

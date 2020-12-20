@@ -13,7 +13,7 @@ public class CourseEntityAdapter {
     this.entityFabric = entityFabric;
   }
   
-  public CourseEntity transformSringArraytoEntities(String idAndName,String units){
+  public CourseEntity adaptStringToCourseEntity(String idAndName, String units){
     String id = separateIdAndName(idAndName)[0];
     String name = separateIdAndName(idAndName)[1];
     return entityFabric.createCourseEntity(id, name, Integer.parseInt(units));
