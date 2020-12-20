@@ -1,7 +1,7 @@
 package com.sebastiangi312.SSKCD.domainTest;
 
 import com.sebastiangi312.SSKCD.domain.Course;
-import com.sebastiangi312.SSKCD.domain.repository.CourseRepository;
+import com.sebastiangi312.SSKCD.repository.CourseRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

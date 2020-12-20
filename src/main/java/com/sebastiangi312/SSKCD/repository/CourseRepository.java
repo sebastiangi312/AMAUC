@@ -1,4 +1,4 @@
-package com.sebastiangi312.SSKCD.domain.repository;
+package com.sebastiangi312.SSKCD.repository;
 
 import com.sebastiangi312.SSKCD.domain.Course;
 import org.springframework.data.repository.CrudRepository;

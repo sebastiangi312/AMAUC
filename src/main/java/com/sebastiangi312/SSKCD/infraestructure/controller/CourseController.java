@@ -2,15 +2,11 @@ package com.sebastiangi312.SSKCD.infraestructure.controller;
 
 import com.sebastiangi312.SSKCD.application.factory.CourseComandoFactory;
 import com.sebastiangi312.SSKCD.application.handler.CourseHandler;
-import com.sebastiangi312.SSKCD.domain.Course;
-import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.*;
 
 @RestController
 @RequestMapping("api/v1/courseManager")
@@ -26,7 +22,7 @@ public class CourseController {
   }
   
   @Transactional
-  @RequestMapping(value = "/courses", method = RequestMethod.POST)
+  @RequestMapping(value = "/courses/", method = RequestMethod.POST)
   public void uploadCourses(@RequestBody final String coursesInTxt) {
     for(String[] course : parseToList(coursesInTxt)){
       courseHandler.saveCourse(courseComandoFactory.createCourseComando(course));
@@ -44,8 +40,11 @@ public class CourseController {
   
   
   @RequestMapping(value = "/courses", method = RequestMethod.GET)
-  public List<Course> getAll(){
-    return courseHandler.getAll();
+  public Map<String, List<Object>> getAll(){
+    Map<String, List<Object>> response = new HashMap<>();
+    List<Object> courses = Arrays.asList(courseHandler.getAll().toArray());
+    response.put("Courses",courses);
+    return response;
   }
   
   @RequestMapping(value = "/courses", method = RequestMethod.DELETE)
@@ -54,7 +53,11 @@ public class CourseController {
   }
   
   @RequestMapping(value = "/course/{code}", method = RequestMethod.GET)
-  public Course get(@PathVariable String code){ return courseHandler.get(code); }
+  public Map<String, Object> get(@PathVariable String code){
+    Map<String, Object> response = new HashMap<>();
+    response.put("Course",courseHandler.get(code));
+    return response;
+  }
   
   @Transactional
   @RequestMapping(value = "/course/{code}", method = RequestMethod.DELETE)

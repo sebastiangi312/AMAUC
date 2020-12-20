@@ -1,7 +1,7 @@
 package com.sebastiangi312.SSKCD.domain.services;
 
 import com.sebastiangi312.SSKCD.domain.Course;
-import com.sebastiangi312.SSKCD.domain.repository.CourseRepository;
+import com.sebastiangi312.SSKCD.repository.CourseRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
