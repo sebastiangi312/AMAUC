@@ -1,7 +1,7 @@
-package com.sebastiangi312.SSKCD.persistance;
+package com.sebastiangi312.SSKCD.persistence;
 
-import com.sebastiangi312.SSKCD.persistance.entity.GradeEntity;
-import com.sebastiangi312.SSKCD.persistance.repository.GradeEntityRepository;
+import com.sebastiangi312.SSKCD.persistence.entity.GradeEntity;
+import com.sebastiangi312.SSKCD.persistence.repository.GradeEntityRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

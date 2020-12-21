@@ -1,6 +1,6 @@
-package com.sebastiangi312.SSKCD.persistance.fabric;
+package com.sebastiangi312.SSKCD.persistence.fabric;
 
-import com.sebastiangi312.SSKCD.persistance.entity.CourseEntity;
+import com.sebastiangi312.SSKCD.persistence.entity.CourseEntity;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,7 +1,7 @@
-package com.sebastiangi312.SSKCD.persistance;
+package com.sebastiangi312.SSKCD.persistence;
 
-import com.sebastiangi312.SSKCD.persistance.entity.CourseEntity;
-import com.sebastiangi312.SSKCD.persistance.repository.CourseEntityRepository;
+import com.sebastiangi312.SSKCD.persistence.entity.CourseEntity;
+import com.sebastiangi312.SSKCD.persistence.repository.CourseEntityRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

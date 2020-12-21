@@ -1,7 +1,7 @@
 package com.sebastiangi312.SSKCD.infraestructure.controller;
 
-import com.sebastiangi312.SSKCD.application.handler.PersistanceCourseHandler;
-import com.sebastiangi312.SSKCD.application.handler.PersistanceGradeHandler;
+import com.sebastiangi312.SSKCD.application.handler.PersistenceCourseHandler;
+import com.sebastiangi312.SSKCD.application.handler.PersistenceGradeHandler;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
 public class CourseController {
   
   
-  private final PersistanceCourseHandler persistanceCourseHandler;
-  private final PersistanceGradeHandler persistanceGradeHandler;
+  private final PersistenceCourseHandler persistenceCourseHandler;
+  private final PersistenceGradeHandler persistenceGradeHandler;
   
-  public CourseController(PersistanceCourseHandler domainHandler,
-                          PersistanceGradeHandler persistanceGradeHandler) {
-    this.persistanceCourseHandler = domainHandler;
-    this.persistanceGradeHandler = persistanceGradeHandler;
+  public CourseController(PersistenceCourseHandler domainHandler,
+                          PersistenceGradeHandler persistenceGradeHandler) {
+    this.persistenceCourseHandler = domainHandler;
+    this.persistenceGradeHandler = persistenceGradeHandler;
   }
   
   @Transactional
@@ -30,8 +30,8 @@ public class CourseController {
   public void uploadCourses(@RequestBody final String coursesInTxt) {
     for (String[] course : parseToList(coursesInTxt)) {
       String[] codeAndName = separateIdAndName(course[0]);
-      persistanceCourseHandler.saveCourses(codeAndName[0], codeAndName[1], course[1]);
-      persistanceGradeHandler.saveGrade(codeAndName[0], course[5], course[4], course[3]);
+      persistenceCourseHandler.saveCourses(codeAndName[0], codeAndName[1], course[1]);
+      persistenceGradeHandler.saveGrade(codeAndName[0], course[5], course[4], course[3]);
     }
   }
   
@@ -49,14 +49,14 @@ public class CourseController {
   @RequestMapping(value = "/courses", method = RequestMethod.GET)
   public Map<String, List<Object>> getCourses() {
     Map<String, List<Object>> response = new HashMap<>();
-    response.put("courses", persistanceCourseHandler.getCourses());
+    response.put("courses", persistenceCourseHandler.getCourses());
     return response;
   }
   
   @RequestMapping(value = "/gradedCourses", method = RequestMethod.GET)
   public Map<String, List<Object>> getGradedCourses() {
     Map<String, List<Object>> response = new HashMap<>();
-    response.put("courses", persistanceGradeHandler.getGradedCourses());
+    response.put("courses", persistenceGradeHandler.getGradedCourses());
     return response;
   }
   

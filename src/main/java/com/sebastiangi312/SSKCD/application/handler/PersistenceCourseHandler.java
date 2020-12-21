@@ -1,19 +1,19 @@
 package com.sebastiangi312.SSKCD.application.handler;
 
 import com.sebastiangi312.SSKCD.application.adapter.entityAdpaters.CourseEntityAdapter;
-import com.sebastiangi312.SSKCD.persistance.CourseRepositoryService;
+import com.sebastiangi312.SSKCD.persistence.CourseRepositoryService;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class PersistanceCourseHandler {
+public class PersistenceCourseHandler {
   
   private final CourseEntityAdapter courseEntityAdapter;
   private final CourseRepositoryService courseRepositoryService;
   
-  public PersistanceCourseHandler(CourseEntityAdapter courseEntityAdapter,
+  public PersistenceCourseHandler(CourseEntityAdapter courseEntityAdapter,
                                   CourseRepositoryService courseRepositoryService) {
     this.courseEntityAdapter = courseEntityAdapter;
     this.courseRepositoryService = courseRepositoryService;

@@ -1,21 +1,21 @@
 package com.sebastiangi312.SSKCD.application.handler;
 
 import com.sebastiangi312.SSKCD.application.adapter.entityAdpaters.GradeEntityAdapter;
-import com.sebastiangi312.SSKCD.persistance.CourseRepositoryService;
-import com.sebastiangi312.SSKCD.persistance.GradeRepositoryService;
+import com.sebastiangi312.SSKCD.persistence.CourseRepositoryService;
+import com.sebastiangi312.SSKCD.persistence.GradeRepositoryService;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class PersistanceGradeHandler {
+public class PersistenceGradeHandler {
   
   private final GradeEntityAdapter gradeEntityAdapter;
   private final GradeRepositoryService gradeRepositoryService;
   private final CourseRepositoryService courseRepositoryService;
   
-  public PersistanceGradeHandler(GradeEntityAdapter gradeEntityAdapter,
+  public PersistenceGradeHandler(GradeEntityAdapter gradeEntityAdapter,
                                  GradeRepositoryService gradeRepositoryService,
                                  CourseRepositoryService courseRepositoryService) {
     this.gradeEntityAdapter = gradeEntityAdapter;

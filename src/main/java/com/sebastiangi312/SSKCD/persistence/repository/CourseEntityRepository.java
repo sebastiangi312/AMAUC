@@ -1,6 +1,6 @@
-package com.sebastiangi312.SSKCD.persistance.repository;
+package com.sebastiangi312.SSKCD.persistence.repository;
 
-import com.sebastiangi312.SSKCD.persistance.entity.CourseEntity;
+import com.sebastiangi312.SSKCD.persistence.entity.CourseEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

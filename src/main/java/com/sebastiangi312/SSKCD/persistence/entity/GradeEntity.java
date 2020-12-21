@@ -1,4 +1,4 @@
-package com.sebastiangi312.SSKCD.persistance.entity;
+package com.sebastiangi312.SSKCD.persistence.entity;
 
 import javax.persistence.*;
 
@@ -9,7 +9,7 @@ public class GradeEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   
-  @ManyToOne(optional = false,cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @ManyToOne(optional = false,cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
   private CourseEntity course;
   
   private boolean approved;

@@ -1,15 +1,13 @@
-package com.sebastiangi312.SSKCD.persistance.entity;
+package com.sebastiangi312.SSKCD.persistence.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class CourseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
+  
   private String code;
   private String name;
   private int units;
