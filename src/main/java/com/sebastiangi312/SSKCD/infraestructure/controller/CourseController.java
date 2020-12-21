@@ -22,7 +22,7 @@ public class CourseController {
   }
   
   @Transactional
-  @RequestMapping(value = "/courses/", method = RequestMethod.POST)
+  @RequestMapping(value = "/courses", method = RequestMethod.POST)
   public void uploadCourses(@RequestBody final String coursesInTxt) {
     for (String[] course : parseToList(coursesInTxt)) {
       persistanceCourseHandler.saveCourses(course[0], course[1]);
@@ -42,7 +42,9 @@ public class CourseController {
   
   @RequestMapping(value = "/courses", method = RequestMethod.GET)
   public Map<String, List<Object>> getAll() {
-    return null;
+    Map<String, List<Object>> response = new HashMap<>();
+    response.put("courses", persistanceCourseHandler.getCourses());
+    return response;
   }
   
   @RequestMapping(value = "/courses", method = RequestMethod.DELETE)

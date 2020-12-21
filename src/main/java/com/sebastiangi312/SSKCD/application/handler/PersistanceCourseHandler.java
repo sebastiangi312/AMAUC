@@ -2,8 +2,10 @@ package com.sebastiangi312.SSKCD.application.handler;
 
 import com.sebastiangi312.SSKCD.application.adapter.CourseEntityAdapter;
 import com.sebastiangi312.SSKCD.persistance.CourseRepositoryService;
-import com.sebastiangi312.SSKCD.persistance.entity.CourseEntity;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class PersistanceCourseHandler {
@@ -18,9 +20,10 @@ public class PersistanceCourseHandler {
   }
   
   public void saveCourses(String idAndName, String units) {
-    CourseEntity course = courseEntityAdapter.adaptStringToCourseEntity(idAndName, units);
-    courseRepositoryService.addCourse(course);
+    courseRepositoryService.addCourse(courseEntityAdapter.adaptStringToCourseEntity(idAndName, units));
   }
   
-  
+  public List<Object> getCourses(){
+    return Arrays.asList(courseRepositoryService.getAll().toArray());
+  }
 }
