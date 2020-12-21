@@ -1,9 +1,8 @@
 package com.sebastiangi312.SSKCD.application.handler;
 
-import com.sebastiangi312.SSKCD.application.adapter.GradeEntityAdapter;
+import com.sebastiangi312.SSKCD.application.adapter.entityAdpaters.GradeEntityAdapter;
 import com.sebastiangi312.SSKCD.persistance.CourseRepositoryService;
 import com.sebastiangi312.SSKCD.persistance.GradeRepositoryService;
-import com.sebastiangi312.SSKCD.persistance.entity.GradeEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;

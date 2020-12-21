@@ -1,6 +1,6 @@
 package com.sebastiangi312.SSKCD.application.handler;
 
-import com.sebastiangi312.SSKCD.application.adapter.CourseEntityAdapter;
+import com.sebastiangi312.SSKCD.application.adapter.entityAdpaters.CourseEntityAdapter;
 import com.sebastiangi312.SSKCD.persistance.CourseRepositoryService;
 import org.springframework.stereotype.Component;
 

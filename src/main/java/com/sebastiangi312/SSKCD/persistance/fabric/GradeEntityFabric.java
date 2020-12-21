@@ -1,4 +1,4 @@
-package com.sebastiangi312.SSKCD.application.fabric;
+package com.sebastiangi312.SSKCD.persistance.fabric;
 
 
 import com.sebastiangi312.SSKCD.persistance.entity.CourseEntity;

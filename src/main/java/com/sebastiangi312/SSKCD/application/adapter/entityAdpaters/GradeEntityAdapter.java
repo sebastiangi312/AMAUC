@@ -1,6 +1,6 @@
-package com.sebastiangi312.SSKCD.application.adapter;
+package com.sebastiangi312.SSKCD.application.adapter.entityAdpaters;
 
-import com.sebastiangi312.SSKCD.application.fabric.GradeEntityFabric;
+import com.sebastiangi312.SSKCD.persistance.fabric.GradeEntityFabric;
 import com.sebastiangi312.SSKCD.persistance.entity.CourseEntity;
 import com.sebastiangi312.SSKCD.persistance.entity.GradeEntity;
 import org.springframework.stereotype.Component;
