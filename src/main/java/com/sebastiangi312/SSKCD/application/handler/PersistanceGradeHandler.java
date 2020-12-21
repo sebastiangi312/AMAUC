@@ -6,6 +6,9 @@ import com.sebastiangi312.SSKCD.persistance.GradeRepositoryService;
 import com.sebastiangi312.SSKCD.persistance.entity.GradeEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Component
 public class PersistanceGradeHandler {
   
@@ -22,8 +25,11 @@ public class PersistanceGradeHandler {
   }
   
   public void saveGrade(String code, String approved, String grade, String semester) {
-    GradeEntity gradeEntity = gradeEntityAdapter.adaptToGradeEntity(courseRepositoryService.getCourse(code),
-                                                                    approved, grade, semester);
-    gradeRepositoryService.addGrade(gradeEntity);
+    gradeRepositoryService.addGrade(gradeEntityAdapter.adaptToGradeEntity(
+      courseRepositoryService.getCourse(code), approved, grade, semester));
+  }
+  
+  public List<Object> getGradedCourses(){
+    return Arrays.asList(gradeRepositoryService.getAll().toArray());
   }
 }

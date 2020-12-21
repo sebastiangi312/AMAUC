@@ -15,7 +15,7 @@ public class GradeEntityAdapter {
   }
   
   public GradeEntity adaptToGradeEntity(CourseEntity course, String approved, String graded,String date){
-    boolean isApproved = approved.equals("APROBADA");
+    boolean isApproved = approved.equals("APROBADA\r");
     Double grade;
     if(isNumeric(graded))
       grade = Double.parseDouble(graded);

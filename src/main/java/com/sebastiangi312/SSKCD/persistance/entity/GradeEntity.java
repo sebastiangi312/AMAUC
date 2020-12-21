@@ -9,7 +9,7 @@ public class GradeEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   
-  @ManyToOne(optional = false,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @ManyToOne(optional = false,cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private CourseEntity course;
   
   private boolean approved;

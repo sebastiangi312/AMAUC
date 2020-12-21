@@ -19,8 +19,8 @@ public class PersistanceCourseHandler {
     this.courseRepositoryService = courseRepositoryService;
   }
   
-  public void saveCourses(String idAndName, String units) {
-    courseRepositoryService.addCourse(courseEntityAdapter.adaptStringToCourseEntity(idAndName, units));
+  public void saveCourses(String code, String name, String units) {
+    courseRepositoryService.addCourse(courseEntityAdapter.adaptStringToCourseEntity(code, name, units));
   }
   
   public List<Object> getCourses(){

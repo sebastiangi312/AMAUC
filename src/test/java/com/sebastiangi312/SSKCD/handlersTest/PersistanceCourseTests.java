@@ -19,7 +19,7 @@ public class PersistanceCourseTests {
   
   @Test
   public void should_save_courses(){
-    persistanceCourseHandler.saveCourses("BASE DE DATOS II (3007848)","3");
+    persistanceCourseHandler.saveCourses("3007848","BASE DE DATOS II","3");
     
     Assert.assertEquals("3007848", courseRepositoryService.getCourse("3007848").getCode());
   }

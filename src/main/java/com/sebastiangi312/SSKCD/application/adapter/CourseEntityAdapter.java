@@ -13,25 +13,8 @@ public class CourseEntityAdapter {
     this.entityFabric = entityFabric;
   }
   
-  public CourseEntity adaptStringToCourseEntity(String idAndName, String units){
-    String id = separateIdAndName(idAndName)[0];
-    String name = separateIdAndName(idAndName)[1];
-    return entityFabric.createCourseEntity(id, name, Integer.parseInt(units));
-  }
-  
-  private String[] separateIdAndName(String idAndName) {
-    String name = idAndName.split("\\s\\(\\d+\\)")[0];
-    StringBuilder id = new StringBuilder();
-    boolean aux = false;
-    for (int i = idAndName.length() - 1; i >= 0; i--) {
-      if (idAndName.charAt(i) == '(')
-        break;
-      if (aux)
-        id.insert(0, idAndName.charAt(i));
-      if (idAndName.charAt(i) == ')')
-        aux = true;
-    }
-    return new String[]{id.toString(), name};
+  public CourseEntity adaptStringToCourseEntity(String code, String name, String units){
+    return entityFabric.createCourseEntity(code, name, Integer.parseInt(units));
   }
   
 }
