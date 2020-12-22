@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface CourseEntityRepository extends CrudRepository<CourseEntity, Long> {
 
   CourseEntity findByCode(String code);
+  
+  void deleteByCode(String code);
 }

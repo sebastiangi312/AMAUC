@@ -31,4 +31,8 @@ public class CourseRepositoryService {
     return StreamSupport.stream(repository.findAll().spliterator(), false).
                                            collect(Collectors.toList());
   }
+  
+  public void deleteAll(){ repository.deleteAll(); }
+  
+  public void delete(String code){ repository.deleteByCode(code); }
 }

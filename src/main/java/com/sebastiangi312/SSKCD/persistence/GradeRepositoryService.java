@@ -1,5 +1,6 @@
 package com.sebastiangi312.SSKCD.persistence;
 
+import com.sebastiangi312.SSKCD.persistence.entity.CourseEntity;
 import com.sebastiangi312.SSKCD.persistence.entity.GradeEntity;
 import com.sebastiangi312.SSKCD.persistence.repository.GradeEntityRepository;
 import org.springframework.stereotype.Component;
@@ -24,5 +25,13 @@ public class GradeRepositoryService {
   public List<GradeEntity> getAll(){
     return StreamSupport.stream(repository.findAll().spliterator(), false).
       collect(Collectors.toList());
+  }
+  
+  public void deleteAll(){
+    repository.deleteAll();
+  }
+  
+  public void delete(CourseEntity courseEntity) {
+    repository.deleteByCourse(courseEntity);
   }
 }

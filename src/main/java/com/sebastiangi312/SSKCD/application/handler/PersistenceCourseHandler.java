@@ -28,4 +28,8 @@ public class PersistenceCourseHandler {
   }
   
   public Object getCourse(String code){ return courseRepositoryService.getCourse(code); }
+  
+  public void deleteAll(){ courseRepositoryService.deleteAll(); }
+  
+  public void delete(String code){ courseRepositoryService.delete(code);}
 }

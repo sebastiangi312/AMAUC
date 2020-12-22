@@ -43,4 +43,9 @@ public class PersistenceGradeHandler {
     return gradeRepositoryService.getAll().stream().filter(i -> i.getGrade() != null)
                                  .collect(Collectors.toList());
   }
+  
+  public void deleteAll(){ gradeRepositoryService.deleteAll(); }
+  
+  public void delete(String code){ gradeRepositoryService.delete(
+                                    courseRepositoryService.getCourse(code)); }
 }

@@ -1,5 +1,6 @@
 package com.sebastiangi312.SSKCD.infraestructure.controller;
 
+import com.sebastiangi312.SSKCD.application.handler.CourseHandler;
 import com.sebastiangi312.SSKCD.application.handler.PersistenceCourseHandler;
 import com.sebastiangi312.SSKCD.application.handler.PersistenceGradeHandler;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +19,13 @@ public class CourseController {
   
   private final PersistenceCourseHandler persistenceCourseHandler;
   private final PersistenceGradeHandler persistenceGradeHandler;
+  private final CourseHandler courseHandler;
   
   public CourseController(PersistenceCourseHandler domainHandler,
-                          PersistenceGradeHandler persistenceGradeHandler) {
+                          PersistenceGradeHandler persistenceGradeHandler, CourseHandler courseHandler) {
     this.persistenceCourseHandler = domainHandler;
     this.persistenceGradeHandler = persistenceGradeHandler;
+    this.courseHandler = courseHandler;
   }
   
   @Transactional
@@ -33,6 +36,21 @@ public class CourseController {
       persistenceCourseHandler.saveCourses(codeAndName[0], codeAndName[1], course[1]);
       persistenceGradeHandler.saveGrade(codeAndName[0], course[5], course[4], course[3]);
     }
+  }
+  
+  private String[] separateIdAndName(String idAndName) {
+    String name = idAndName.split("\\s\\(\\d+\\)")[0];
+    StringBuilder id = new StringBuilder();
+    boolean aux = false;
+    for (int i = idAndName.length() - 1; i >= 0; i--) {
+      if (idAndName.charAt(i) == '(')
+        break;
+      if (aux)
+        id.insert(0, idAndName.charAt(i));
+      if (idAndName.charAt(i) == ')')
+        aux = true;
+    }
+    return new String[]{id.toString(), name};
   }
   
   private List<String[]> parseToList(String coursesInText) {
@@ -61,38 +79,31 @@ public class CourseController {
   }
   
   @RequestMapping(value = "/courses", method = RequestMethod.DELETE)
-  public void deleteAll() {
-  
+  public void deleteAllCourses() {
+    persistenceGradeHandler.deleteAll();
+    persistenceCourseHandler.deleteAll();
   }
   
   @RequestMapping(value = "/course/{code}", method = RequestMethod.GET)
   public Map<String, Object> get(@PathVariable String code) {
-    return new HashMap<>();
+    Map<String, Object> response = new HashMap<>();
+    response.put("course", persistenceCourseHandler.getCourse(code));
+    return response;
   }
   
   @Transactional
   @RequestMapping(value = "/course/{code}", method = RequestMethod.DELETE)
   public void delete(@PathVariable String code) {
-  
+    persistenceGradeHandler.delete(code);
+    persistenceCourseHandler.delete(code);
   }
   
   @RequestMapping(value = "/generalInformation", method = RequestMethod.GET)
   public Map<String, Double> getGradeAverage() {
-    return new HashMap<>();
+    Map<String, Double> response = new HashMap<>();
+    response.put("PAPA", courseHandler.getPAPA());
+    response.put("PA", courseHandler.getPA());
+    return response;
   }
   
-  private String[] separateIdAndName(String idAndName) {
-    String name = idAndName.split("\\s\\(\\d+\\)")[0];
-    StringBuilder id = new StringBuilder();
-    boolean aux = false;
-    for (int i = idAndName.length() - 1; i >= 0; i--) {
-      if (idAndName.charAt(i) == '(')
-        break;
-      if (aux)
-        id.insert(0, idAndName.charAt(i));
-      if (idAndName.charAt(i) == ')')
-        aux = true;
-    }
-    return new String[]{id.toString(), name};
-  }
 }
