@@ -1,4 +1,4 @@
-package com.sebastiangi312.SSKCD.application.adapter.entityAdpaters;
+package com.sebastiangi312.SSKCD.persistence.adapter;
 
 import com.sebastiangi312.SSKCD.persistence.fabric.GradeEntityFabric;
 import com.sebastiangi312.SSKCD.persistence.entity.CourseEntity;

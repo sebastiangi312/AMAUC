@@ -1,6 +1,6 @@
 package com.sebastiangi312.SSKCD.application.handler;
 
-import com.sebastiangi312.SSKCD.application.adapter.entityAdpaters.CourseEntityAdapter;
+import com.sebastiangi312.SSKCD.persistence.adapter.CourseEntityAdapter;
 import com.sebastiangi312.SSKCD.persistence.CourseRepositoryService;
 import org.springframework.stereotype.Component;
 
@@ -26,4 +26,6 @@ public class PersistenceCourseHandler {
   public List<Object> getCourses(){
     return Arrays.asList(courseRepositoryService.getAll().toArray());
   }
+  
+  public Object getCourse(String code){ return courseRepositoryService.getCourse(code); }
 }

@@ -56,7 +56,7 @@ public class CourseController {
   @RequestMapping(value = "/gradedCourses", method = RequestMethod.GET)
   public Map<String, List<Object>> getGradedCourses() {
     Map<String, List<Object>> response = new HashMap<>();
-    response.put("courses", persistenceGradeHandler.getGradedCourses());
+    response.put("courses", persistenceGradeHandler.getCourses());
     return response;
   }
   

@@ -21,7 +21,7 @@ public class PersistenceGradeTests {
   public void should_save_grades(){
     persistenceCourseHandler.saveCourses("3007848","BASE DE DATOS II","3");
     persistenceGradeHandler.saveGrade("3007848", "APROBADA\r", "4.0", "20-19");
-    GradeEntity grade = (GradeEntity) persistenceGradeHandler.getGradedCourses().get(0);
+    GradeEntity grade = (GradeEntity) persistenceGradeHandler.getCourses().get(0);
     Assert.assertEquals(4.0,grade.getGrade(),0.1);
     Assert.assertEquals(3,grade.getCourse().getUnits());
   }

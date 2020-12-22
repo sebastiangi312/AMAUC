@@ -1,12 +1,14 @@
 package com.sebastiangi312.SSKCD.application.handler;
 
-import com.sebastiangi312.SSKCD.application.adapter.entityAdpaters.GradeEntityAdapter;
+import com.sebastiangi312.SSKCD.persistence.adapter.GradeEntityAdapter;
 import com.sebastiangi312.SSKCD.persistence.CourseRepositoryService;
 import com.sebastiangi312.SSKCD.persistence.GradeRepositoryService;
+import com.sebastiangi312.SSKCD.persistence.entity.GradeEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class PersistenceGradeHandler {
@@ -28,7 +30,17 @@ public class PersistenceGradeHandler {
       courseRepositoryService.getCourse(code), approved, grade, semester));
   }
   
-  public List<Object> getGradedCourses(){
+  public List<Object> getCourses(){
     return Arrays.asList(gradeRepositoryService.getAll().toArray());
+  }
+  
+  public List<Object> getApprovedCourses() {
+    return gradeRepositoryService.getAll().stream().filter(GradeEntity::isApproved)
+                                 .filter(i -> i.getGrade() != null).collect(Collectors.toList());
+  }
+  
+  public List<Object> getGradedCourses() {
+    return gradeRepositoryService.getAll().stream().filter(i -> i.getGrade() != null)
+                                 .collect(Collectors.toList());
   }
 }
