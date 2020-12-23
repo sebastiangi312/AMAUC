@@ -2,6 +2,7 @@ package com.sebastiangi312.SSKCD.domain.adapter;
 
 import com.sebastiangi312.SSKCD.domain.fabric.CourseFabric;
 import com.sebastiangi312.SSKCD.domain.model.GradedCourse;
+import com.sebastiangi312.SSKCD.persistence.entity.GradeEntity;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,8 +15,8 @@ public class GradeAdapter {
   }
   
   public GradedCourse ObjectToGradedCourse(Object course){
-    GradedCourse gradedCourse = (GradedCourse)course;
-    return fabric.createGradedCourse(gradedCourse.getName(),gradedCourse.getCode(),
-      gradedCourse.getUnits(),gradedCourse.isApproved(),gradedCourse.getGrade());
+    GradeEntity gradedCourse = (GradeEntity)course;
+    return fabric.createGradedCourse(gradedCourse.getCourse().getName(),gradedCourse.getCourse().getCode(),
+                                      gradedCourse.getCourse().getUnits(),gradedCourse.isApproved(),gradedCourse.getGrade());
   }
 }
