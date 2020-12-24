@@ -1,6 +1,7 @@
 package com.sebastiangi312.SSKCD.infraestructure.controller;
 
 import com.sebastiangi312.SSKCD.application.handler.CourseHandler;
+import com.sebastiangi312.SSKCD.application.adapter.GradeAdapter;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -18,13 +19,15 @@ public class CourseController {
   private final CoursePersistenceController coursePersistenceController;
   private final GradePersistenceController gradePersistenceController;
   private final CourseHandler courseHandler;
+  private final GradeAdapter gradeAdapter;
   
   public CourseController(CoursePersistenceController coursePersistenceController,
                           GradePersistenceController gradePersistenceController,
-                          CourseHandler courseHandler) {
+                          CourseHandler courseHandler, GradeAdapter gradeAdapter) {
     this.coursePersistenceController = coursePersistenceController;
     this.gradePersistenceController = gradePersistenceController;
     this.courseHandler = courseHandler;
+    this.gradeAdapter = gradeAdapter;
   }
   
   
@@ -100,8 +103,10 @@ public class CourseController {
   @RequestMapping(value = "/generalInformation", method = RequestMethod.GET)
   public Map<String, Double> getGradeAverage() {
     Map<String, Double> response = new HashMap<>();
-    response.put("PAPA", courseHandler.getPAPA());
-    response.put("PA", courseHandler.getPA());
+    response.put("PAPA", courseHandler.getPAPA(gradePersistenceController.getGradedCourses().stream()
+                                    .map(gradeAdapter::GradeEntityToCourse).collect(Collectors.toList())));
+    response.put("PA", courseHandler.getPA(gradePersistenceController.getApprovedCourses().stream()
+                                    .map(gradeAdapter::GradeEntityToCourse).collect(Collectors.toList())));
     return response;
   }
   

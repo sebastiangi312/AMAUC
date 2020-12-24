@@ -1,6 +1,6 @@
 package com.sebastiangi312.SSKCD.application.handler;
 
-import com.sebastiangi312.SSKCD.application.pdu.Course;
+import com.sebastiangi312.SSKCD.application.pdu.Grade;
 import com.sebastiangi312.SSKCD.domain.adapter.GradeAdapter;
 import com.sebastiangi312.SSKCD.domain.service.CourseService;
 import org.springframework.stereotype.Component;
@@ -19,12 +19,12 @@ public class CourseHandler {
     this.adapter = adapter;
   }
   
-  public Double getPAPA(List<Course> gradedCourses){
+  public Double getPAPA(List<Grade> gradedCourses){
     return service.getGradePoint(gradedCourses.stream()
                   .map(adapter::ObjectToGradedCourse).collect(Collectors.toList()));
   }
   
-  public Double getPA(List<Course> ApprovedCourses){
+  public Double getPA(List<Grade> ApprovedCourses){
     return service.getGradePoint(ApprovedCourses.stream()
                   .map(adapter::ObjectToGradedCourse).collect(Collectors.toList()));
   }
