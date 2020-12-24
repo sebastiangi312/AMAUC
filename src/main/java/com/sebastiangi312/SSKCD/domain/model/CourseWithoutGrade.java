@@ -1,12 +1,12 @@
 package com.sebastiangi312.SSKCD.domain.model;
 
-public class Course {
+public class CourseWithoutGrade {
   
   String code;
   String name;
   int units;
   
-  public Course(String code, String name, int units) {
+  public CourseWithoutGrade(String code, String name, int units) {
     this.code = code;
     this.name = name;
     this.units = units;

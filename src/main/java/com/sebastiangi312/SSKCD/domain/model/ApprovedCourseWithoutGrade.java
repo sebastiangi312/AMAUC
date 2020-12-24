@@ -1,9 +1,9 @@
 package com.sebastiangi312.SSKCD.domain.model;
 
-public class ApprovedCourse extends Course{
+public class ApprovedCourseWithoutGrade extends CourseWithoutGrade {
   
   boolean approved;
-  public ApprovedCourse(String code, String name, int untis, boolean approved) {
+  public ApprovedCourseWithoutGrade(String code, String name, int untis, boolean approved) {
     super(code, name, untis);
     this.approved = approved;
   }

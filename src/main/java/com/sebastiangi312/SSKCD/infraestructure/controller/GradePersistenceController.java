@@ -1,4 +1,4 @@
-package com.sebastiangi312.SSKCD.application.handler;
+package com.sebastiangi312.SSKCD.infraestructure.controller;
 
 import com.sebastiangi312.SSKCD.persistence.adapter.GradeEntityAdapter;
 import com.sebastiangi312.SSKCD.persistence.CourseRepositoryService;
@@ -11,15 +11,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class PersistenceGradeHandler {
+public class GradePersistenceController {
   
   private final GradeEntityAdapter gradeEntityAdapter;
   private final GradeRepositoryService gradeRepositoryService;
   private final CourseRepositoryService courseRepositoryService;
   
-  public PersistenceGradeHandler(GradeEntityAdapter gradeEntityAdapter,
-                                 GradeRepositoryService gradeRepositoryService,
-                                 CourseRepositoryService courseRepositoryService) {
+  public GradePersistenceController(GradeEntityAdapter gradeEntityAdapter,
+                                    GradeRepositoryService gradeRepositoryService,
+                                    CourseRepositoryService courseRepositoryService) {
     this.gradeEntityAdapter = gradeEntityAdapter;
     this.gradeRepositoryService = gradeRepositoryService;
     this.courseRepositoryService = courseRepositoryService;

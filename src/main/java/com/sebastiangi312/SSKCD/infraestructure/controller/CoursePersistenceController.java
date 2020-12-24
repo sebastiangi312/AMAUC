@@ -1,4 +1,4 @@
-package com.sebastiangi312.SSKCD.application.handler;
+package com.sebastiangi312.SSKCD.infraestructure.controller;
 
 import com.sebastiangi312.SSKCD.persistence.adapter.CourseEntityAdapter;
 import com.sebastiangi312.SSKCD.persistence.CourseRepositoryService;
@@ -8,13 +8,13 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class PersistenceCourseHandler {
+public class CoursePersistenceController {
   
   private final CourseEntityAdapter courseEntityAdapter;
   private final CourseRepositoryService courseRepositoryService;
   
-  public PersistenceCourseHandler(CourseEntityAdapter courseEntityAdapter,
-                                  CourseRepositoryService courseRepositoryService) {
+  public CoursePersistenceController(CourseEntityAdapter courseEntityAdapter,
+                                     CourseRepositoryService courseRepositoryService) {
     this.courseEntityAdapter = courseEntityAdapter;
     this.courseRepositoryService = courseRepositoryService;
   }

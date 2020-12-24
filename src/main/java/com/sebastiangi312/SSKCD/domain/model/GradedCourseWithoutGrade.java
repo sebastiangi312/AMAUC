@@ -1,10 +1,10 @@
 package com.sebastiangi312.SSKCD.domain.model;
 
-public class GradedCourse extends ApprovedCourse {
+public class GradedCourseWithoutGrade extends ApprovedCourseWithoutGrade {
   
   private double grade;
   
-  public GradedCourse(String code, String name, int untis, boolean isApproved, double grade) {
+  public GradedCourseWithoutGrade(String code, String name, int untis, boolean isApproved, double grade) {
     super(code, name, untis, isApproved);
     this.grade = grade;
   }
