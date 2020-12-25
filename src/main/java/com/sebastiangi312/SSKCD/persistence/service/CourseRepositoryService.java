@@ -1,4 +1,4 @@
-package com.sebastiangi312.SSKCD.persistence;
+package com.sebastiangi312.SSKCD.persistence.service;
 
 import com.sebastiangi312.SSKCD.persistence.entity.CourseEntity;
 import com.sebastiangi312.SSKCD.persistence.repository.CourseEntityRepository;
@@ -17,22 +17,25 @@ public class CourseRepositoryService {
     this.repository = repository;
   }
   
-  public void addCourse(CourseEntity course){
-    if(getCourse(course.getCode()) == null){
+  public void addCourse(CourseEntity course) {
+    if(repository.findByCode(course.getCode()) == null)
       repository.save(course);
-    }
   }
   
-  public CourseEntity getCourse(String code){
+  public CourseEntity getCourse(String code) {
     return repository.findByCode(code);
   }
   
-  public List<CourseEntity> getAll(){
+  public List<CourseEntity> getAll() {
     return StreamSupport.stream(repository.findAll().spliterator(), false).
-                                           collect(Collectors.toList());
+      collect(Collectors.toList());
   }
   
-  public void deleteAll(){ repository.deleteAll(); }
+  public void deleteAll() {
+    repository.deleteAll();
+  }
   
-  public void delete(String code){ repository.deleteByCode(code); }
+  public void delete(String code) {
+    repository.deleteByCode(code);
+  }
 }

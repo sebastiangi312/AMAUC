@@ -1,7 +1,7 @@
 package com.sebastiangi312.SSKCD.infraestructure.controller;
 
-import com.sebastiangi312.SSKCD.application.handler.CourseHandler;
-import com.sebastiangi312.SSKCD.application.adapter.GradeAdapter;
+import com.sebastiangi312.SSKCD.infraestructure.persistenceHandler.CoursePersistenceHandler;
+import com.sebastiangi312.SSKCD.infraestructure.persistenceHandler.GradePersistenceHandler;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -12,32 +12,25 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/v1/courseManager")
+@RequestMapping("api/v1/courseManager/courses")
 public class CourseController {
   
+  private final CoursePersistenceHandler coursePersistenceHandler;
+  private final GradePersistenceHandler gradePersistenceHandler;
   
-  private final CoursePersistenceController coursePersistenceController;
-  private final GradePersistenceController gradePersistenceController;
-  private final CourseHandler courseHandler;
-  private final GradeAdapter gradeAdapter;
-  
-  public CourseController(CoursePersistenceController coursePersistenceController,
-                          GradePersistenceController gradePersistenceController,
-                          CourseHandler courseHandler, GradeAdapter gradeAdapter) {
-    this.coursePersistenceController = coursePersistenceController;
-    this.gradePersistenceController = gradePersistenceController;
-    this.courseHandler = courseHandler;
-    this.gradeAdapter = gradeAdapter;
+  public CourseController(CoursePersistenceHandler coursePersistenceHandler,
+                          GradePersistenceHandler gradePersistenceHandler) {
+    this.coursePersistenceHandler = coursePersistenceHandler;
+    this.gradePersistenceHandler = gradePersistenceHandler;
   }
   
-  
   @Transactional
-  @RequestMapping(value = "/courses", method = RequestMethod.POST)
+  @RequestMapping(value = "/", method = RequestMethod.POST)
   public void uploadCourses(@RequestBody final String coursesInTxt) {
     for (String[] course : parseToList(coursesInTxt)) {
       String[] codeAndName = separateIdAndName(course[0]);
-      coursePersistenceController.saveCourses(codeAndName[0], codeAndName[1], course[1]);
-      gradePersistenceController.saveGrade(codeAndName[0], course[5], course[4], course[3]);
+      coursePersistenceHandler.saveCourses(codeAndName[0], codeAndName[1], course[1]);
+      gradePersistenceHandler.saveGrade(codeAndName[0], course[3], course[4], course[5]);
     }
   }
   
@@ -66,47 +59,45 @@ public class CourseController {
     return new String[]{id.toString(), name};
   }
   
-  @RequestMapping(value = "/courses", method = RequestMethod.GET)
+  @RequestMapping(value = "/{code}", method = RequestMethod.GET)
+  public Map<String, Object> get(@PathVariable String code) {
+    Map<String, Object> response = new HashMap<>();
+    response.put("course", coursePersistenceHandler.getCourse(code));
+    return response;
+  }
+  
+  @RequestMapping(value = "/", method = RequestMethod.GET)
   public Map<String, List<Object>> getCourses() {
     Map<String, List<Object>> response = new HashMap<>();
-    response.put("courses", coursePersistenceController.getCourses());
+    response.put("courses", coursePersistenceHandler.getCourses());
     return response;
+  }
+  
+  @RequestMapping(value = "/", method = RequestMethod.DELETE)
+  public void deleteAllCourses() {
+    gradePersistenceHandler.deleteAll();
+    coursePersistenceHandler.deleteAll();
+  }
+  
+  
+  @Transactional
+  @RequestMapping(value = "/{code}", method = RequestMethod.DELETE)
+  public void delete(@PathVariable String code) {
+    gradePersistenceHandler.delete(code);
+    coursePersistenceHandler.delete(code);
   }
   
   @RequestMapping(value = "/gradedCourses", method = RequestMethod.GET)
   public Map<String, List<Object>> getGradedCourses() {
     Map<String, List<Object>> response = new HashMap<>();
-    response.put("courses", gradePersistenceController.getCourses());
+    response.put("courses", gradePersistenceHandler.getCourses());
     return response;
   }
   
-  @RequestMapping(value = "/courses", method = RequestMethod.DELETE)
-  public void deleteAllCourses() {
-    gradePersistenceController.deleteAll();
-    coursePersistenceController.deleteAll();
-  }
-  
-  @RequestMapping(value = "/course/{code}", method = RequestMethod.GET)
-  public Map<String, Object> get(@PathVariable String code) {
-    Map<String, Object> response = new HashMap<>();
-    response.put("course", coursePersistenceController.getCourse(code));
-    return response;
-  }
-  
-  @Transactional
-  @RequestMapping(value = "/course/{code}", method = RequestMethod.DELETE)
-  public void delete(@PathVariable String code) {
-    gradePersistenceController.delete(code);
-    coursePersistenceController.delete(code);
-  }
-  
-  @RequestMapping(value = "/generalInformation", method = RequestMethod.GET)
-  public Map<String, Double> getGradeAverage() {
-    Map<String, Double> response = new HashMap<>();
-    response.put("PAPA", courseHandler.getPAPA(gradePersistenceController.getGradedCourses().stream()
-                                    .map(gradeAdapter::GradeEntityToCourse).collect(Collectors.toList())));
-    response.put("PA", courseHandler.getPA(gradePersistenceController.getApprovedCourses().stream()
-                                    .map(gradeAdapter::GradeEntityToCourse).collect(Collectors.toList())));
+  @RequestMapping(value = "/approvedCourses", method = RequestMethod.GET)
+  public Map<String, List<Object>> getApprovedCourses() {
+    Map<String, List<Object>> response = new HashMap<>();
+    response.put("courses", gradePersistenceHandler.getApprovedCourses());
     return response;
   }
   

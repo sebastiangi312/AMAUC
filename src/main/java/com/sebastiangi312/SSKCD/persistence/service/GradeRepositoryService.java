@@ -1,4 +1,4 @@
-package com.sebastiangi312.SSKCD.persistence;
+package com.sebastiangi312.SSKCD.persistence.service;
 
 import com.sebastiangi312.SSKCD.persistence.entity.CourseEntity;
 import com.sebastiangi312.SSKCD.persistence.entity.GradeEntity;
@@ -14,13 +14,9 @@ public class GradeRepositoryService {
   
   private final GradeEntityRepository repository;
   
-  public GradeRepositoryService(GradeEntityRepository repository) {
-    this.repository = repository;
-  }
+  public GradeRepositoryService(GradeEntityRepository repository) { this.repository = repository; }
   
-  public void addGrade(GradeEntity grade){
-    repository.save(grade);
-  }
+  public void addGrade(GradeEntity grade){ repository.save(grade); }
   
   public List<GradeEntity> getAll(){
     return StreamSupport.stream(repository.findAll().spliterator(), false).

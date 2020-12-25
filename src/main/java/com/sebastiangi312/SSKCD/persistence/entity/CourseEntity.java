@@ -8,7 +8,9 @@ public class CourseEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
   
+  @Column(unique = true)
   private String code;
+  
   private String name;
   private int units;
   
