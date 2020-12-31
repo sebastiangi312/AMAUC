@@ -1,62 +1,66 @@
 package com.sebastiangi312.SSKCD.infraestructure.controller;
 
 import com.sebastiangi312.SSKCD.infraestructure.persistenceHandler.CoursePersistenceHandler;
-import com.sebastiangi312.SSKCD.infraestructure.persistenceHandler.GradePersistenceHandler;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/courseManager/courses")
 public class CourseController {
   
   private final CoursePersistenceHandler coursePersistenceHandler;
-  private final GradePersistenceHandler gradePersistenceHandler;
   
-  public CourseController(CoursePersistenceHandler coursePersistenceHandler,
-                          GradePersistenceHandler gradePersistenceHandler) {
+  public CourseController(CoursePersistenceHandler coursePersistenceHandler) {
     this.coursePersistenceHandler = coursePersistenceHandler;
-    this.gradePersistenceHandler = gradePersistenceHandler;
   }
   
   @Transactional
   @RequestMapping(value = "/", method = RequestMethod.POST)
-  public void uploadCourses(@RequestBody final String coursesInTxt) {
-    for (String[] course : parseToList(coursesInTxt)) {
-      String[] codeAndName = separateIdAndName(course[0]);
-      coursePersistenceHandler.saveCourses(codeAndName[0], codeAndName[1], course[1]);
-      gradePersistenceHandler.saveGrade(codeAndName[0], course[3], course[4], course[5]);
+  public void uploadCourses(@RequestBody final String career) {
+    JSONObject pensum = readPensum(career);
+    JSONArray components = (JSONArray) pensum.get("components");
+    for (Object groupsObject : components) {
+      JSONArray groups = (JSONArray) ((JSONObject) groupsObject).get("group");
+      for(Object coursesObject : groups){
+        JSONArray courses = (JSONArray) ((JSONObject) coursesObject).get("courses");
+        for(Object course: courses){
+          addCourse((JSONObject) course);
+        }
+      }
     }
   }
   
-  private List<String[]> parseToList(String coursesInText) {
-    String[] coursesSeparatedByLines = coursesInText.split("\n");
-    List<String> coursesMerged = new LinkedList<>();
-    for (int line = 0; line < coursesSeparatedByLines.length; line += 2) {
-      coursesMerged.add(coursesSeparatedByLines[line].concat("\t").
-        concat(coursesSeparatedByLines[line + 1]));
+  private JSONObject readPensum(String pensum) {
+    File resource;
+    try {
+      final String PATH = "pensums/" + pensum + ".json";
+      resource = new ClassPathResource(PATH).getFile();
+      String text = new String(Files.readAllBytes(resource.toPath()));
+      JSONParser parser = new JSONParser();
+      return (JSONObject) parser.parse(text);
+    } catch (IOException | ParseException e) {
+      e.printStackTrace();
     }
-    return coursesMerged.stream().map(i -> i.split("\t")).collect(Collectors.toList());
+    return null;
   }
   
-  private String[] separateIdAndName(String idAndName) {
-    String name = idAndName.split("\\s\\(\\d+\\)")[0];
-    StringBuilder id = new StringBuilder();
-    boolean aux = false;
-    for (int i = idAndName.length() - 1; i >= 0; i--) {
-      if (idAndName.charAt(i) == '(')
-        break;
-      if (aux)
-        id.insert(0, idAndName.charAt(i));
-      if (idAndName.charAt(i) == ')')
-        aux = true;
-    }
-    return new String[]{id.toString(), name};
+  private void addCourse(JSONObject course) {
+    String name = (String) course.get("name");
+    String code = (String) course.get("code");
+    String units = (String) course.get("units");
+    coursePersistenceHandler.saveCourses(code, name, units);
   }
   
   @RequestMapping(value = "/{code}", method = RequestMethod.GET)
@@ -75,30 +79,13 @@ public class CourseController {
   
   @RequestMapping(value = "/", method = RequestMethod.DELETE)
   public void deleteAllCourses() {
-    gradePersistenceHandler.deleteAll();
     coursePersistenceHandler.deleteAll();
   }
-  
   
   @Transactional
   @RequestMapping(value = "/{code}", method = RequestMethod.DELETE)
   public void delete(@PathVariable String code) {
-    gradePersistenceHandler.delete(code);
     coursePersistenceHandler.delete(code);
-  }
-  
-  @RequestMapping(value = "/gradedCourses", method = RequestMethod.GET)
-  public Map<String, List<Object>> getGradedCourses() {
-    Map<String, List<Object>> response = new HashMap<>();
-    response.put("courses", gradePersistenceHandler.getCourses());
-    return response;
-  }
-  
-  @RequestMapping(value = "/approvedCourses", method = RequestMethod.GET)
-  public Map<String, List<Object>> getApprovedCourses() {
-    Map<String, List<Object>> response = new HashMap<>();
-    response.put("courses", gradePersistenceHandler.getApprovedCourses());
-    return response;
   }
   
 }

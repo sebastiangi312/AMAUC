@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 @RequestMapping("api/v1/courseManager/generalInformation")
 public class GeneralInformationController {
   
-  private final CourseController courseController;
+  private final GradeController courseController;
   private final GradeHandler gradeHandler;
   private final GradeAdapter gradeAdapter;
   
-  public GeneralInformationController(CourseController courseController,
+  public GeneralInformationController(GradeController courseController,
                                       GradeHandler gradeHandler, GradeAdapter gradeAdapter) {
     this.courseController = courseController;
     this.gradeHandler = gradeHandler;

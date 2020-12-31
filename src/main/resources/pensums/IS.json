@@ -1,0 +1,372 @@
+{
+  "degree": {
+    "name": "Ingenieria de Sistemas e Informatica - Pensum NUevo"
+  },
+  "components": [
+    {
+      "name": "Componente de Fundamentacion",
+      "group": [
+        {
+          "name": "Ciencias Básicas",
+          "min_units": 43,
+          "courses": [
+            {
+              "code": "1000004-M",
+              "name": "Cálculo Diferencial",
+              "units": "4"
+            },
+            {
+              "code": "1000008-M",
+              "name": "Geometría Vectorial y Analítica",
+              "units": "4"
+            },
+            {
+              "code": "1000005-M",
+              "name": "Cálculo Integral",
+              "units": "4"
+            },
+            {
+              "code": "1000003-M",
+              "name": "Álgebra Lineal",
+              "units": "4"
+            },
+            {
+              "code": "3006906",
+              "name": "Matemáticas Discretas",
+              "units": "4"
+            },
+            {
+              "code": "3010651",
+              "name": "Estadística  I",
+              "units": "3"
+            },
+            {
+              "code": "1000019-M",
+              "name": "Física Mecánica",
+              "units": "4"
+            },
+            {
+              "code": "1000007-M",
+              "name": "Ecuaciones Diferenciales",
+              "units": "4"
+            },
+            {
+              "code": "1000006-M",
+              "name": "Cálculo en Varias Variables",
+              "units": "4"
+            },
+            {
+              "code": "3006826",
+              "name": "Sistemas Numéricos",
+              "units": "4"
+            },
+            {
+              "code": "3006905",
+              "name": "Matemáticas Especiales",
+              "units": "4"
+            },
+            {
+              "code": "3006907",
+              "name": "Métodos Numéricos",
+              "units": "4"
+            },
+            {
+              "code": "3006915",
+              "name": "Estadística II",
+              "units": "4"
+            },
+            {
+              "code": "3006927",
+              "name": "Estadística Descriptiva y Exploratoria",
+              "units": "4"
+            },
+            {
+              "code": "3009137",
+              "name": "Estadística III",
+              "units": "4"
+            },
+            {
+              "code": "1000017-M",
+              "name": "Física de Electricidad y Magnetismo",
+              "units": "4"
+            },
+            {
+              "code": "1000020-M",
+              "name": "Física de Oscilaciones, Ondas y Óptica",
+              "units": "4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Componente de Formación Disciplinar o Profesional",
+      "group": [
+        {
+          "name": "Ciencias de la Computación",
+          "min_units": 27,
+          "courses": [
+            {
+              "code": "3010435",
+              "name": "Fundamentos de Programación",
+              "units": "3"
+            },
+            {
+              "code": "3007744",
+              "name": "Programación Orientada a Objetos",
+              "units": "3"
+            },
+            {
+              "code": "3007741",
+              "name": "Estructura de Datos",
+              "units": "3"
+            },
+            {
+              "code": "3007847",
+              "name": "Bases de Datos I",
+              "units": "3"
+            },
+            {
+              "code": "3010426",
+              "name": "Teoría de Lenguajes de Programación",
+              "units": "3"
+            },
+            {
+              "code": "3007863",
+              "name": "Arquitectura de Computadores",
+              "units": "3"
+            },
+            {
+              "code": "3010476",
+              "name": "Introducción a la Inteligencia Artificial",
+              "units": "3"
+            },
+            {
+              "code": "3007867",
+              "name": "Sistemas Operativos",
+              "units": "3"
+            },
+            {
+              "code": "3007865",
+              "name": "Redes y Telecomunicaciones I",
+              "units": "3"
+            }
+          ]
+        },
+        {
+          "name": "Ingeniería de Software",
+          "min_units": 9,
+          "courses": [
+            {
+              "code": "3007853",
+              "name": "Ingeniería de Software",
+              "units": "3"
+            },
+            {
+              "code": "3007852",
+              "name": "Ingeniería de Requisitos",
+              "units": "3"
+            },
+            {
+              "code": "3010440",
+              "name": "Calidad de Software",
+              "units": "3"
+            }
+          ]
+        },
+        {
+          "name": "Sistemas",
+          "min_units": 11,
+          "courses": [
+            {
+              "code": "3010438",
+              "name": "Introducción a la Ingeniería de Sistemas e Informática",
+              "units": "2"
+            },
+            {
+              "code": "3007324",
+              "name": "Investigación de Operaciones  I",
+              "units": "3"
+            },
+            {
+              "code": "3010415",
+              "name": "Introducción al Análisis de Decisiones",
+              "units": "3"
+            },
+            {
+              "code": "3007331",
+              "name": "Simulación de Sistemas",
+              "units": "3"
+            }
+          ]
+        },
+        {
+          "name": "Proyectos en Ingeniería",
+          "min_units": 10,
+          "courses": [
+            {
+              "code": "3010408",
+              "name": "Fundamentos de Proyectos en Ingeniería",
+              "units": "3"
+            },
+            {
+              "code": "3010407",
+              "name": "Estructuración y Evaluación de Proyectos en Ingeniería",
+              "units": "3"
+            },
+            {
+              "code": "3010439",
+              "name": "Proyecto Integrado en Ingeniería",
+              "units": "4"
+            }
+          ]
+        },
+        {
+          "name": "Tecnologías de Aplicación y Desarrollo Profesional",
+          "min_units": 22,
+          "courses": [
+            {
+              "code": "3008883",
+              "name": "Fundamentos de Sistemas de Información e Inteligencia de Negocios",
+              "units": "3"
+            },
+            {
+              "code": "3007854",
+              "name": "Técnicas de Aprendizaje Estadístico",
+              "units": "3"
+            },
+            {
+              "code": "3007859",
+              "name": "Sistemas de Lógica Difusa",
+              "units": "3"
+            },
+            {
+              "code": "3007860",
+              "name": "Sistemas de Recuperación de la Información",
+              "units": "3"
+            },
+            {
+              "code": "3007861",
+              "name": "Sistemas Multiagentes",
+              "units": "3"
+            },
+            {
+              "code": "3007862",
+              "name": "Visión Artificial",
+              "units": "3"
+            },
+            {
+              "code": "3009150",
+              "name": "Redes Neuronales Artificiales y Algoritmos Bioinspirados",
+              "units": "3"
+            },
+            {
+              "code": "3009151",
+              "name": "Introducción a la Robótica",
+              "units": "3"
+            },
+            {
+              "code": "3010422",
+              "name": "Sistemas Basados en Conocimiento",
+              "units": "3"
+            },
+            {
+              "code": "3007850",
+              "name": "Diseño y Construcción de Productos de Software",
+              "units": "3"
+            },
+            {
+              "code": "3009583",
+              "name": "Teoría y Métodos de la Ingeniería de Software",
+              "units": "3"
+            },
+            {
+              "code": "3007848",
+              "name": "Bases de Datos II",
+              "units": "3"
+            },
+            {
+              "code": "3010114",
+              "name": "Teoría de la Computación y la Compilación",
+              "units": "3"
+            },
+            {
+              "code": "3009430",
+              "name": "Análisis y Diseño de Algoritmos",
+              "units": "3"
+            },
+            {
+              "code": "3007866",
+              "name": "Redes y Telecomunicaciones II",
+              "units": "3"
+            },
+            {
+              "code": "3007871",
+              "name": "Programación Matemática",
+              "units": "3"
+            },
+            {
+              "code": "3007872",
+              "name": "Sistemas Complejos",
+              "units": "3"
+            },
+            {
+              "code": "3007325",
+              "name": "Investigación de Operaciones II",
+              "units": "3"
+            },
+            {
+              "code": "3007311",
+              "name": "Dinámica de Sistemas",
+              "units": "3"
+            },
+            {
+              "code": "3007873",
+              "name": "Teoría de la Organización Industrial",
+              "units": "3"
+            },
+            {
+              "code": "3010123",
+              "name": "Fundamentos de Analítica",
+              "units": "3"
+            },
+            {
+              "code": "3007851",
+              "name": "Gestión de Proyectos de Software",
+              "units": "3"
+            }
+          ]
+        },
+        {
+          "name": "Trabajo de Grado",
+          "min_units": 6,
+          "courses": [
+            {
+              "code": "3007868",
+              "name": "Trabajo de Grado",
+              "units": "6"
+            },{
+              "code": "3010684",
+              "name": "Práctica de Extensión",
+              "units": "3"
+            },{
+              "code": "3007869",
+              "name": "Cursos de Posgrado",
+              "units": "3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Libre Elección",
+      "group":[
+        {
+          "name": "Libre Elección",
+          "min_units": 32,
+          "courses": []
+        }
+      ]
+    }
+  ]
+}
