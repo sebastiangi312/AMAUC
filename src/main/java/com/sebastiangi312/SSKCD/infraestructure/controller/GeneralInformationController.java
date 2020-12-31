@@ -2,6 +2,7 @@ package com.sebastiangi312.SSKCD.infraestructure.controller;
 
 import com.sebastiangi312.SSKCD.application.handler.GradeHandler;
 import com.sebastiangi312.SSKCD.application.adapter.GradeAdapter;
+import com.sebastiangi312.SSKCD.infraestructure.controller.persistanceController.GradeController;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.sebastiangi312.SSKCD.infraestructure.controller;
+package com.sebastiangi312.SSKCD.infraestructure.controller.persistanceController;
 
 import com.sebastiangi312.SSKCD.infraestructure.persistenceHandler.CoursePersistenceHandler;
 import com.sebastiangi312.SSKCD.infraestructure.persistenceHandler.GradePersistenceHandler;

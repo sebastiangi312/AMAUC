@@ -1,11 +1,11 @@
 package com.sebastiangi312.SSKCD.domain.service;
 
 import com.sebastiangi312.SSKCD.domain.model.GradedCourse;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class CourseService {
   
   public double getGradePoint(List<GradedCourse> grades){
