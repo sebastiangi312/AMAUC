@@ -5,10 +5,10 @@
   "components": [
     {
       "name": "Componente de Fundamentacion",
-      "group": [
+      "groups": [
         {
           "name": "Ciencias Básicas",
-          "min_units": 43,
+          "min_units": "43",
           "courses": [
             {
               "code": "1000004-M",
@@ -101,10 +101,10 @@
     },
     {
       "name": "Componente de Formación Disciplinar o Profesional",
-      "group": [
+      "groups": [
         {
           "name": "Ciencias de la Computación",
-          "min_units": 27,
+          "min_units": "27",
           "courses": [
             {
               "code": "3010435",
@@ -155,7 +155,7 @@
         },
         {
           "name": "Ingeniería de Software",
-          "min_units": 9,
+          "min_units": "9",
           "courses": [
             {
               "code": "3007853",
@@ -176,7 +176,7 @@
         },
         {
           "name": "Sistemas",
-          "min_units": 11,
+          "min_units": "11",
           "courses": [
             {
               "code": "3010438",
@@ -202,7 +202,7 @@
         },
         {
           "name": "Proyectos en Ingeniería",
-          "min_units": 10,
+          "min_units": "10",
           "courses": [
             {
               "code": "3010408",
@@ -223,7 +223,7 @@
         },
         {
           "name": "Tecnologías de Aplicación y Desarrollo Profesional",
-          "min_units": 22,
+          "min_units": "22",
           "courses": [
             {
               "code": "3008883",
@@ -339,7 +339,7 @@
         },
         {
           "name": "Trabajo de Grado",
-          "min_units": 6,
+          "min_units": "6",
           "courses": [
             {
               "code": "3007868",
@@ -360,10 +360,10 @@
     },
     {
       "name": "Libre Elección",
-      "group":[
+      "groups":[
         {
           "name": "Libre Elección",
-          "min_units": 32,
+          "min_units": "32",
           "courses": []
         }
       ]

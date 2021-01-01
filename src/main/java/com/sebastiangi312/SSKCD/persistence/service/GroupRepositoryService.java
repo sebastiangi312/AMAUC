@@ -17,8 +17,12 @@ public class GroupRepositoryService {
     this.repository = repository;
   }
   
-  public void addGroup(GroupEntity group){
-    repository.save(group);
+  public void addGroup(GroupEntity group) {
+    GroupEntity groupGetted = get(group.getName());
+    if(groupGetted == null)
+      repository.save(group);
+    else if(!groupGetted.equals(group))
+      repository.save(group);
   }
   
   public List<GroupEntity> getAll(){

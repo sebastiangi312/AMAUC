@@ -31,7 +31,7 @@ public class GradePersistenceHandler {
       courseRepositoryService.getCourse(code), approved, grade, semester));
   }
   
-  public List<Object> getCourses(){
+  public List<Object> getAllGrades(){
     return Arrays.asList(gradeRepositoryService.getAll().toArray());
   }
   

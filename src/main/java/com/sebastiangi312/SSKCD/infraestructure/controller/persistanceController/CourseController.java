@@ -1,17 +1,12 @@
 package com.sebastiangi312.SSKCD.infraestructure.controller.persistanceController;
 
+import com.sebastiangi312.SSKCD.infraestructure.controller.inputs.JSONHandler;
 import com.sebastiangi312.SSKCD.infraestructure.persistenceHandler.CoursePersistenceHandler;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,32 +23,18 @@ public class CourseController {
   
   @Transactional
   @RequestMapping(value = "/", method = RequestMethod.POST)
-  public void uploadCourses(@RequestBody final String career) {
-    JSONObject pensum = readPensum(career);
-    JSONArray components = (JSONArray) pensum.get("components");
-    for (Object groupsObject : components) {
-      JSONArray groups = (JSONArray) ((JSONObject) groupsObject).get("group");
-      for(Object coursesObject : groups){
-        JSONArray courses = (JSONArray) ((JSONObject) coursesObject).get("courses");
+  public void uploadCourses(@RequestBody final String degreeSelected) {
+    JSONObject degree = JSONHandler.readJSON(degreeSelected);
+    JSONArray components = (JSONArray) JSONHandler.getProperty(degree,"components");
+    for (Object component : components) {
+      JSONArray groups = (JSONArray) JSONHandler.getProperty(component,"groups");
+      for(Object group : groups){
+        JSONArray courses = (JSONArray) JSONHandler.getProperty(group,"courses");
         for(Object course: courses){
-          addCourse((JSONObject) course);
+          addCourse((JSONObject)course);
         }
       }
     }
-  }
-  
-  private JSONObject readPensum(String pensum) {
-    File resource;
-    try {
-      final String PATH = "pensums/" + pensum + ".json";
-      resource = new ClassPathResource(PATH).getFile();
-      String text = new String(Files.readAllBytes(resource.toPath()));
-      JSONParser parser = new JSONParser();
-      return (JSONObject) parser.parse(text);
-    } catch (IOException | ParseException e) {
-      e.printStackTrace();
-    }
-    return null;
   }
   
   private void addCourse(JSONObject course) {

@@ -29,8 +29,8 @@ public class GradeController {
   
   @Transactional
   @RequestMapping(value = "/", method = RequestMethod.POST)
-  public void uploadGrades(@RequestBody final String coursesInTxt) {
-    for (String[] course : parseToList(coursesInTxt)) {
+  public void uploadGrades(@RequestBody final String gradesInTxt) {
+    for (String[] course : parseToList(gradesInTxt)) {
       String[] codeAndName = separateIdAndName(course[0]);
       coursePersistenceHandler.saveCourses(codeAndName[0], codeAndName[1], course[1]);
       gradePersistenceHandler.saveGrade(codeAndName[0], course[3], course[4], course[5]);
@@ -72,7 +72,7 @@ public class GradeController {
   @RequestMapping(value = "/gradedCourses", method = RequestMethod.GET)
   public Map<String, List<Object>> getGradedCourses() {
     Map<String, List<Object>> response = new HashMap<>();
-    response.put("courses", gradePersistenceHandler.getCourses());
+    response.put("courses", gradePersistenceHandler.getGradedCourses());
     return response;
   }
   
@@ -83,4 +83,10 @@ public class GradeController {
     return response;
   }
   
+  @RequestMapping(value = "/", method = RequestMethod.GET)
+  public Map<String, List<Object>> getGra() {
+    Map<String, List<Object>> response = new HashMap<>();
+    response.put("courses", gradePersistenceHandler.getAllGrades());
+    return response;
+  }
 }

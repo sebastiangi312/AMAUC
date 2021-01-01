@@ -58,4 +58,26 @@ public class GroupEntity {
   public void setMinUnits(int minUnits) {
     this.minUnits = minUnits;
   }
+  
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof GroupEntity)) return false;
+    
+    GroupEntity that = (GroupEntity) o;
+    
+    if (getMinUnits() != that.getMinUnits()) return false;
+    if (!getName().equals(that.getName())) return false;
+    if (!getComponent().equals(that.getComponent())) return false;
+    return getDegree().equals(that.getDegree());
+  }
+  
+  @Override
+  public int hashCode() {
+    int result = getName().hashCode();
+    result = 31 * result + getComponent().hashCode();
+    result = 31 * result + getDegree().hashCode();
+    result = 31 * result + getMinUnits();
+    return result;
+  }
 }
