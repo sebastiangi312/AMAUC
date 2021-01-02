@@ -28,8 +28,10 @@ public class GradePersistenceHandler {
   
   
   public void saveGrade(String code, GradeData gradeData) {
-    gradeRepositoryService.addGrade(
-      gradeEntityAdapter.gradeDataToGradeEntity(courseRepositoryService.getCourse(code),gradeData));
+    if(courseRepositoryService.getCourse(code) != null){
+      gradeRepositoryService.addGrade(
+        gradeEntityAdapter.gradeDataToGradeEntity(courseRepositoryService.getCourse(code),gradeData));
+    }
   }
   
   public List<Object> getAllGrades(){

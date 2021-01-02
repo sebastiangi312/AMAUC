@@ -26,8 +26,8 @@ public class CourseController {
   }
   
   @Transactional
-  @RequestMapping(value = "/{degreeSelected}", method = RequestMethod.POST)
-  public void uploadCourses(@PathVariable String degreeSelected) {
+  @RequestMapping(value = "/", method = RequestMethod.POST)
+  public void uploadCourses(@RequestBody final String degreeSelected) {
     JSONObject degree = JSONHandler.readJSON(degreeSelected);
     JSONArray components = (JSONArray) JSONHandler.getProperty(degree,"components");
     for (Object component : components) {
@@ -53,7 +53,8 @@ public class CourseController {
   
   public void uploadLECourse(String code, String name, String units) {
     coursePersistenceHandler.saveCourses(
-      courseDataAdapter.StringToCourseData(code,name,units), "Libre Elección", "Libre Elección");
+      courseDataAdapter.StringToCourseData(code,name,units),
+      "Libre Elección", "Libre Elección");
   }
   
   @RequestMapping(value = "/{code}", method = RequestMethod.GET)

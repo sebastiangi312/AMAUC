@@ -4,6 +4,7 @@ import com.sebastiangi312.SSKCD.persistence.database.entity.CourseEntity;
 import com.sebastiangi312.SSKCD.persistence.database.repository.CourseEntityRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -38,4 +39,5 @@ public class CourseRepositoryService {
   public void delete(String code) {
     repository.deleteByCode(code);
   }
+  
 }

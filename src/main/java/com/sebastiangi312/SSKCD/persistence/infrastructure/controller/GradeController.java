@@ -36,7 +36,8 @@ public class GradeController {
     for (String[] course : TXTHandler.parseToList(gradesInTxt)) {
       String code = TXTHandler.separateIdAndName(course[0])[0];
       String name = TXTHandler.separateIdAndName(course[0])[1];
-      courseController.uploadLECourse(code, name, course[1]);
+      if(courseController.get(code).get("course") == null)
+        courseController.uploadLECourse(code,name,course[1]);
       gradePersistenceHandler.saveGrade(code,
         gradeDataAdapter.StringToGradeData(course[5], course[4], course[3]));
     }
@@ -63,7 +64,7 @@ public class GradeController {
   }
   
   @RequestMapping(value = "/", method = RequestMethod.GET)
-  public Map<String, List<Object>> getGra() {
+  public Map<String, List<Object>> getGrades() {
     Map<String, List<Object>> response = new HashMap<>();
     response.put("courses", gradePersistenceHandler.getAllGrades());
     return response;

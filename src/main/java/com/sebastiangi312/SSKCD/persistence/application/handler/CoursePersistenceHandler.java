@@ -7,7 +7,9 @@ import com.sebastiangi312.SSKCD.persistence.database.service.GroupRepositoryServ
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class CoursePersistenceHandler {
@@ -41,5 +43,6 @@ public class CoursePersistenceHandler {
   
   public void deleteAll(){ courseRepositoryService.deleteAll(); }
   
-  public void delete(String code){ courseRepositoryService.delete(code);}
+  public void delete(String code){ courseRepositoryService.delete(code); }
+  
 }
