@@ -12,34 +12,34 @@ import java.util.stream.Collectors;
 @Component
 public class GroupPersistenceHandler {
   
-  private final GroupRepositoryService service;
+  private final GroupRepositoryService groupRepositoryService;
   private final GroupEntityAdapter groupEntityAdapter;
   private final GroupDataAdapter groupDataAdapter;
   
-  public GroupPersistenceHandler(GroupRepositoryService service,
+  public GroupPersistenceHandler(GroupRepositoryService groupRepositoryService,
                                  GroupEntityAdapter groupEntityAdapter,
                                  GroupDataAdapter groupDataAdapter) {
-    this.service = service;
+    this.groupRepositoryService = groupRepositoryService;
     this.groupEntityAdapter = groupEntityAdapter;
     this.groupDataAdapter = groupDataAdapter;
   }
   
   public void createGroup(GroupData groupData) {
-    service.addGroup(groupEntityAdapter.adaptGroupDataToGroupEntity(groupData));
+    groupRepositoryService.addGroup(groupEntityAdapter.adaptGroupDataToGroupEntity(groupData));
   }
   
   public List<Object> getGroups(){
-    return service.getAll().stream().map(groupDataAdapter::groupEntityToGroupData)
+    return groupRepositoryService.getAll().stream().map(groupDataAdapter::groupEntityToGroupData)
                                     .collect(Collectors.toList());
   }
   
   public Object getGroup(String groupName, String componentName){
-    return groupDataAdapter.groupEntityToGroupData(service.get(groupName, componentName));
+    return groupDataAdapter.groupEntityToGroupData(groupRepositoryService.get(groupName, componentName));
   }
   
-  public void deleteAll(){ service.deleteAll();}
+  public void deleteAll(){ groupRepositoryService.deleteAll();}
   
   public void deleteByName(String name) {
-    service.delete(name);
+    groupRepositoryService.delete(name);
   }
 }

@@ -1,6 +1,5 @@
 package com.sebastiangi312.SSKCD.persistence.infrastructure.controller;
 
-
 import com.sebastiangi312.SSKCD.persistence.application.adapter.GradeDataAdapter;
 import com.sebastiangi312.SSKCD.persistence.infrastructure.inputs.gradeTXT.TXTHandler;
 import com.sebastiangi312.SSKCD.persistence.application.handler.GradePersistenceHandler;

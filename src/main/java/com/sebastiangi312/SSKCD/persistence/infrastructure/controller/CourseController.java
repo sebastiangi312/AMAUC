@@ -1,7 +1,7 @@
 package com.sebastiangi312.SSKCD.persistence.infrastructure.controller;
 
 import com.sebastiangi312.SSKCD.persistence.application.adapter.CourseDataAdapter;
-import com.sebastiangi312.SSKCD.persistence.infrastructure.inputs.JSONHandler;
+import com.sebastiangi312.SSKCD.persistence.infrastructure.inputs.JSONPensums.JSONHandler;
 import com.sebastiangi312.SSKCD.persistence.application.handler.CoursePersistenceHandler;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

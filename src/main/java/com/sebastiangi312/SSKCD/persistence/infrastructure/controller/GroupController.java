@@ -1,17 +1,17 @@
 package com.sebastiangi312.SSKCD.persistence.infrastructure.controller;
 
 import com.sebastiangi312.SSKCD.persistence.application.adapter.GroupDataAdapter;
-import com.sebastiangi312.SSKCD.persistence.infrastructure.inputs.JSONHandler;
+import com.sebastiangi312.SSKCD.persistence.infrastructure.inputs.JSONPensums.JSONHandler;
 import com.sebastiangi312.SSKCD.persistence.application.handler.GroupPersistenceHandler;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/courseManager/groups")
@@ -46,7 +46,7 @@ public class GroupController {
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public Map<String, List<Object>> getGroups(){
     Map<String, List<Object>> response = new HashMap<>();
-    List<Object> groups = handler.getGroups().stream().collect(Collectors.toList());
+    List<Object> groups = new ArrayList<>(handler.getGroups());
     response.put("groups",groups);
     return response;
   }
@@ -56,8 +56,8 @@ public class GroupController {
     handler.deleteAll();
   }
   
-  @RequestMapping(value = "/{name}/{component}", method = RequestMethod.DELETE)
-  public void deleteByNameAndComponent(@PathVariable String name){
+  @RequestMapping(value = "/{name}", method = RequestMethod.DELETE)
+  public void deleteByName(@PathVariable String name){
     handler.deleteByName(name);
   }
   

@@ -1,6 +1,5 @@
 package com.sebastiangi312.SSKCD.persistence.database.service;
 
-import com.sebastiangi312.SSKCD.persistence.application.adapter.GradeDataAdapter;
 import com.sebastiangi312.SSKCD.persistence.database.entity.GradeEntity;
 import com.sebastiangi312.SSKCD.persistence.database.repository.GradeEntityRepository;
 import org.springframework.stereotype.Component;
@@ -13,12 +12,9 @@ import java.util.stream.StreamSupport;
 public class GradeRepositoryService {
   
   private final GradeEntityRepository repository;
-  private final GradeDataAdapter adapter;
   
-  public GradeRepositoryService(GradeEntityRepository repository,
-                                GradeDataAdapter adapter) {
+  public GradeRepositoryService(GradeEntityRepository repository) {
     this.repository = repository;
-    this.adapter = adapter;
   }
   
   public void addGrade(GradeEntity grade){

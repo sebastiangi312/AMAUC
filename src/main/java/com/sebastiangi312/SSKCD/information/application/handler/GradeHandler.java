@@ -19,13 +19,9 @@ public class GradeHandler {
     this.adapter = adapter;
   }
   
-  public Double getPAPA(List<Grade> gradedCourses) {
-    return service.getGradePoint(gradedCourses.stream()
+  public Double getGradePoint(List<Grade> courses) {
+    return service.getGradePoint(courses.stream()
       .map(i -> adapter.ObjectToGradedCourse(i.getCourse(), i)).collect(Collectors.toList()));
   }
   
-  public Double getPA(List<Grade> ApprovedCourses) {
-    return service.getGradePoint(ApprovedCourses.stream()
-      .map(i -> adapter.ObjectToGradedCourse(i.getCourse(), i)).collect(Collectors.toList()));
-  }
 }

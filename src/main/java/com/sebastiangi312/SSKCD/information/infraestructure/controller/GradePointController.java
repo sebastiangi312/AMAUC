@@ -12,14 +12,14 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/courseManager/generalInformation")
-public class GeneralInformationController {
+public class GradePointController {
   
   private final GradeController courseController;
   private final GradeHandler gradeHandler;
   private final GradeAdapter gradeAdapter;
   
-  public GeneralInformationController(GradeController courseController,
-                                      GradeHandler gradeHandler, GradeAdapter gradeAdapter) {
+  public GradePointController(GradeController courseController,
+                              GradeHandler gradeHandler, GradeAdapter gradeAdapter) {
     this.courseController = courseController;
     this.gradeHandler = gradeHandler;
     this.gradeAdapter = gradeAdapter;
@@ -29,7 +29,7 @@ public class GeneralInformationController {
   public Map<String, Double> getPAPA() {
     Map<String, Double> response = new HashMap<>();
     List<Object> gradedCourses = courseController.getGradedCourses().get("courses");
-    response.put("PAPA", gradeHandler.getPAPA(gradedCourses.stream().map(gradeAdapter::GradeEntityToCourse)
+    response.put("PAPA", gradeHandler.getGradePoint(gradedCourses.stream().map(gradeAdapter::GradeEntityToCourse)
                                                                     .filter(i -> i.getGrade()!= null).collect(Collectors.toList())));
     return response;
   }
@@ -38,7 +38,7 @@ public class GeneralInformationController {
   public Map<String, Double> getPA() {
     Map<String, Double> response = new HashMap<>();
     List<Object> approvedCourses = courseController.getApprovedCourses().get("courses");
-    response.put("PA", gradeHandler.getPA(approvedCourses.stream().map(gradeAdapter::GradeEntityToCourse)
+    response.put("PA", gradeHandler.getGradePoint(approvedCourses.stream().map(gradeAdapter::GradeEntityToCourse)
                                                                   .collect(Collectors.toList())));
     return response;
   }

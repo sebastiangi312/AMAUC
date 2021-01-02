@@ -1,4 +1,4 @@
-package com.sebastiangi312.SSKCD.persistence.infrastructure.inputs;
+package com.sebastiangi312.SSKCD.persistence.infrastructure.inputs.JSONPensums;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

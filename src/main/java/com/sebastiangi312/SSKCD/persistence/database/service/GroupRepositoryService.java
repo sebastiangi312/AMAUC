@@ -36,7 +36,7 @@ public class GroupRepositoryService {
   
   public void delete(String name){ repository.deleteByName(name);}
   
-  public GroupEntity get(String name, String component){
+  public GroupEntity get(String name, String component) {
     return repository.findByNameAndComponent(name, component);
   }
 }
