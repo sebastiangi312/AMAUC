@@ -9,19 +9,19 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Component
-public class GroupRepositoryService {
+public class GroupEntityRepositoryService {
   
   private final GroupEnitytyRepository repository;
   
-  public GroupRepositoryService(GroupEnitytyRepository repository) {
+  public GroupEntityRepositoryService(GroupEnitytyRepository repository) {
     this.repository = repository;
   }
   
   public void addGroup(GroupEntity group) {
-    GroupEntity groupGet = repository.findByNameAndComponent(group.getName(), group.getComponent());
-    if(groupGet == null)
+    GroupEntity groupObtained = repository.findByNameAndComponent(group.getName(), group.getComponent());
+    if(groupObtained == null)
       repository.save(group);
-    else if(!groupGet.equals(group))
+    else if(!groupObtained.equals(group))
       repository.save(group);
   }
   

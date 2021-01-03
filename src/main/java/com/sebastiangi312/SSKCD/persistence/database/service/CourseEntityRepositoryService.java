@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Component
-public class CourseRepositoryService {
+public class CourseEntityRepositoryService {
   
   private final CourseEntityRepository repository;
   
-  public CourseRepositoryService(CourseEntityRepository repository) {
+  public CourseEntityRepositoryService(CourseEntityRepository repository) {
     this.repository = repository;
   }
   
